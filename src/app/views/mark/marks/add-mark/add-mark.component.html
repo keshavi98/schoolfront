@@ -1,0 +1,193 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Mark</strong></div>
+      <div class="card-body">
+        <form [formGroup]="getMarkForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="class"
+                >Class<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select
+                  class="form-control"
+                  formControlName="class"
+                  (change)="onClassChanged()"
+                >
+                  <option value="" selected disabled>--Select--</option>
+                  <option
+                    *ngFor="let data of ClassList"
+                    value="{{ data._id }}"
+                    title="{{ data.class }}"
+                    >{{ data.class }}</option
+                  >
+                  <div *ngIf="class.invalid && class.touched">
+                    <small class="text-danger" *ngIf="class.errors?.required">
+                      Please Enter Class
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="col-form-label" for="examname"
+                >Exam Name<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="examname">
+                  <option value="" selected disabled>--Select--</option>
+                  <option
+                    *ngFor="let data of ExamList"
+                    value="{{ data._id }}"
+                    title="{{ data.examname }}"
+                    >{{ data.examname }}</option
+                  >
+                  <div *ngIf="examname.invalid && examname.touched">
+                    <small
+                      class="text-danger"
+                      *ngIf="examname.errors?.required"
+                    >
+                      Please Enter Exam Name
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="section">Section</label>
+              <div class="">
+                <select class="form-control" formControlName="section">
+                  <option value="" selected disabled>---Select---</option>
+                  <ng-container *ngFor="let data of classSectionList">
+                    <option value="{{ data._id }}" title="{{ data.section }}">{{
+                      data.section
+                    }}</option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="col-form-label" for="subject"
+                >Subject<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="subject">
+                  <option value="" selected disabled>---Select---</option>
+                  <ng-container *ngFor="let data of classSubjectList">
+                    <option value="{{ data._id }}" title="{{ data.subject }}">{{
+                      data.subject_name
+                    }}</option>
+                    <div *ngIf="subject.invalid && subject.touched">
+                      <small
+                        class="text-danger"
+                        *ngIf="subject.errors?.required"
+                      >
+                        Please Enter Subject
+                      </small>
+                    </div>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row"></div>
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="getMark()"
+            [disabled]="getMarkForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            Mark
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetMark()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+        <table
+          class="table table-striped"
+          [svData]="studentList"
+          #sv="svDataTable"
+          [svRowsOnPage]="5"
+          svSortBy="name"
+          svSortOrder="asc"
+        >
+          <thead>
+            <tr>
+              <th>Photo</th>
+              <th>Name</th>
+              <th>Roll No</th>
+              <ng-container
+                *ngFor="let markDistribution of markDistributionList"
+              >
+                <th>
+                  {{ markDistribution.mark_distribution_type }} ({{
+                    markDistribution.mark_value
+                  }})
+                </th>
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of sv.data; let i = index">
+              <td style="vertical-align: top; ">
+                <img
+                  class="photo"
+                  src="{{ apiUrl }}{{ data.photo }}"
+                  style="width: 50px;
+                    height: 50px;
+                    border-radius: 50%;"
+                />
+              </td>
+              <td>{{ data?.student_name }}</td>
+              <td>{{ data?.roll_no }}</td>
+
+              <ng-container
+                *ngFor="let marks of data.sub_records; let j = index"
+              >
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="marks.mark"
+                    class="form-control"
+                    max="{{ markDistributionList[j].mark_value }}"
+                  />
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="12">
+                <sv-bootstrap-paginator
+                  [rowsOnPageSet]="[5, 10, 25]"
+                ></sv-bootstrap-paginator>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+        <div *ngIf="markDistributionList?.length">
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="setMark()"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            Add Mark
+          </button>
+        </div>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Leave Category</strong></div>
+      <div class="card-body">
+        <form [formGroup]="createLeaveCategoryForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="category"
+                >Category<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="category"
+                  name="category"
+                  class="form-control"
+                  placeholder="Category"
+                  formControlName="category"
+                />
+                <div *ngIf="category.invalid && category.touched">
+                  <small class="text-danger" *ngIf="category.errors?.required">
+                    Please Enter Category
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="editLeavecategory()"
+            [disabled]="createLeaveCategoryForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            Edit Leave category
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetLeavecategory()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

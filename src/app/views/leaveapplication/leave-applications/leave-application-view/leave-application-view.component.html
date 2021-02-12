@@ -1,0 +1,116 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="well">
+      <div class="row">
+        <div classs="col-sm-6">
+          <button class="btn-cs btn-sm-cs">
+            <span class="fa fa-print"></span> Print
+          </button>
+          <a
+            href="https://demo.inilabs.net/school/v4.4/student/print_preview/1/1"
+            class="btn-cs btn-sm-cs"
+            style="text-decoration: none;"
+            role="button"
+            target="_blank"
+            ><i class="fa fa-file"></i> PDF Preview</a
+          >
+
+          <button
+            class="btn-cs btn-sm-cs"
+            data-toggle="modal"
+            data-target="#mail"
+          >
+            <span class="fa fa-envelope-o"></span> Send Pdf to Mail
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="printablediv">
+      <div class="row">
+        <div class="col-sm-3">
+          <div
+            class="box box-primary"
+            style="background-color: white; padding: 15px;"
+          >
+            <div class="box-body box-profile">
+              <!-- <img
+                src="http://192.168.1.46:3000/student/photo/1581322946326.jpeg"
+              /> -->
+              <img
+                class="profile-user-img img-responsive img-circle"
+                [src]="apiUrl + leaveApplicationview?.from_user_info.photo"
+                alt=""
+              />
+              <h3 class="profile-username text-center">
+                {{ leaveApplicationview?.from_user_info.name }}
+              </h3>
+              <p class="text-muted text-center">Student</p>
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Gender</b>
+                  <a class="pull-right">{{
+                    leaveApplicationview?.from_user_info.gender
+                  }}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Birth Date</b>
+                  <a class="pull-right">{{
+                    leaveApplicationview?.from_user_info.dob
+                  }}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Phone</b>
+                  <a class="pull-right">{{
+                    leaveApplicationview?.from_user_info.phone
+                  }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-sm-6 col-mergin"
+          style="width: 50%; position: relative;
+          background: #ffffff;
+          margin-bottom: 20px;"
+        >
+          <div class="box box-primary box-height">
+            <div class="box-body box-profile">
+              <h5>Date - 29 Jan 2019</h5>
+              <p>
+                <span xss="removed"
+                  >All leave must be documented by using the Leave Request form.
+                  Before requesting paid leave, employees must confirm that the
+                  leave to be requested is available by checking the leave
+                  balances on their most current pay voucher or through the
+                  employee self-service system.</span
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div
+            class="box box-primary"
+            style="background-color: white; padding: 15px;"
+          >
+            <div class="box-body box-profile">
+              <div class="single_box">
+                <strong>Schedule</strong>
+                <p class="text-muted">12 Feb 2019 - 20 Feb 2019</p>
+              </div>
+              <div class="single_box">
+                <strong>Available Leave Days</strong>
+                <p class="text-muted">-16</p>
+              </div>
+              <div class="single_box">
+                <strong>Leave Day</strong>
+                <p class="text-muted">0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

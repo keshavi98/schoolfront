@@ -1,0 +1,121 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Leave Assign</strong></div>
+      <div class="card-body">
+        <form [formGroup]="createLeaveassignForm">
+          <div class="form-group row">
+            <!-- <div class="col-md-4">
+              <label class="col-form-label" for="role"
+                >Role<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="role">
+                  <option value="" selected disabled>--Select--</option>
+
+                  <option
+                    *ngFor="let data of RoleList"
+                    value="{{ data._id }}"
+                    title="{{ data.role }}"
+                    >{{ data.role }}</option
+                  >
+                  <div *ngIf="role.invalid && role.touched">
+                    <small class="text-danger" *ngIf="role.errors?.required">
+                      Please Enter Role
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div> -->
+            <div class="col-md-4">
+              <label class="col-form-label" for="role"
+                >Role<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="role">
+                  <option value="" selected disabled>--Select--</option>
+                  <option
+                    *ngFor="let data of userRoles"
+                    value="{{ data.type }}"
+                    title="{{ data.role }}"
+                    >{{ data.role }}</option
+                  >
+
+                  <div *ngIf="role.invalid && role.touched">
+                    <small class="text-danger" *ngIf="role.errors?.required">
+                      Please Enter Role
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="category"
+                >Category<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="category">
+                  <option value="" selected disabled>--Select--</option>
+                  <option
+                    *ngFor="let data of LeavecategoryList"
+                    value="{{ data._id }}"
+                    title="{{ data.category }}"
+                    >{{ data.category }}</option
+                  >
+                  <div *ngIf="category.invalid && category.touched">
+                    <small
+                      class="text-danger"
+                      *ngIf="category.errors?.required"
+                    >
+                      Please Enter Category
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="no_of_day"
+                >No of Day <span class="text-danger">*</span>
+              </label>
+              <div class="">
+                <input
+                  id="no_of_day"
+                  name="no_of_day"
+                  type="text"
+                  class="form-control"
+                  placeholder="no_of_day"
+                  formControlName="no_of_day"
+                />
+                <div *ngIf="no_of_day.invalid && no_of_day.touched">
+                  <small class="text-danger" *ngIf="no_of_day.errors?.required">
+                    Please Enter No of Day
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="addLeaveassign()"
+            [disabled]="createLeaveassignForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            Add Leave Assign
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetLeaveassign()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

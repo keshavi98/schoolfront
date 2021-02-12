@@ -1,0 +1,211 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Exam Schedule</strong></div>
+      <div class="card-body">
+        <form [formGroup]="createExamscheduleForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="class"
+                >Class<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select
+                  class="form-control"
+                  formControlName="class"
+                  (change)="onClassChanged()"
+                >
+                  <option value="" selected disabled>--Select--</option>
+                  <option
+                    *ngFor="let data of ClassList"
+                    value="{{ data._id }}"
+                    title="{{ data.class }}"
+                    >{{ data.class }}</option
+                  >
+                  <div *ngIf="class.invalid && class.touched">
+                    <small class="text-danger" *ngIf="class.errors?.required">
+                      Please Enter Class
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="examname"
+                >Exam Name<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="examname">
+                  <option value="" selected disabled>--Select--</option>
+                  <option
+                    *ngFor="let data of ExamList"
+                    value="{{ data._id }}"
+                    title="{{ data.examname }}"
+                    >{{ data.examname }}</option
+                  >
+                  <div *ngIf="examname.invalid && examname.touched">
+                    <small
+                      class="text-danger"
+                      *ngIf="examname.errors?.required"
+                    >
+                      Please Enter Exam Name
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="section"
+                >Section<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="section">
+                  <option value="" selected disabled>---Select---</option>
+                  <ng-container *ngFor="let data of classSectionList">
+                    <option value="{{ data._id }}" title="{{ data.section }}">{{
+                      data.section
+                    }}</option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="col-form-label" for="subject"
+                >Subject<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="subject">
+                  <option value="" selected disabled>---Select---</option>
+                  <ng-container *ngFor="let data of classSubjectList">
+                    <option value="{{ data._id }}" title="{{ data.subject }}">{{
+                      data.subject_name
+                    }}</option>
+                    <div *ngIf="subject.invalid && subject.touched">
+                      <small
+                        class="text-danger"
+                        *ngIf="subject.errors?.required"
+                      >
+                        Please Enter Subject
+                      </small>
+                    </div>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="date"
+                >Date<span class="text-danger">*</span>
+              </label>
+              <div class="">
+                <input
+                  id="date"
+                  name="date"
+                  type="text"
+                  class="form-control"
+                  placeholder="Date"
+                  formControlName="date"
+                  (change)="onDateChanged()"
+                />
+                <div *ngIf="date.invalid && date.touched">
+                  <small class="text-danger" *ngIf="date.errors?.required">
+                    Please Enter Date
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="col-form-label" for="room"
+                >Room<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  class="form-control"
+                  id="room"
+                  formControlName="room"
+                  type="text"
+                  name="room"
+                  placeholder="Room"
+                />
+              </div>
+              <div *ngIf="room.invalid && room.touched">
+                <small class="text-danger" *ngIf="room.errors?.required">
+                  Please Enter Room
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="time_from"
+                >Time From<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  class="form-control"
+                  id="time_from"
+                  formControlName="time_from"
+                  type="text"
+                  name="time_from"
+                  (change)="onDateChanged()"
+                  placeholder="Time From"
+                />
+              </div>
+              <div *ngIf="time_from.invalid && time_from.touched">
+                <small class="text-danger" *ngIf="time_from.errors?.required">
+                  Please Enter Time From
+                </small>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="col-form-label" for="time_to"
+                >Time To<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  class="form-control"
+                  id="time_to"
+                  formControlName="time_to"
+                  type="text"
+                  name="time_to"
+                  (change)="onDateChanged()"
+                  placeholder="Time To"
+                />
+              </div>
+              <div *ngIf="time_to.invalid && time_to.touched">
+                <small class="text-danger" *ngIf="time_to.errors?.required">
+                  Please Enter Time To
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row"></div>
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="editExamSchedule()"
+            [disabled]="createExamscheduleForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            Edit Exam Schedule
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetExamschedule()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

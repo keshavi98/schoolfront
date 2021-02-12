@@ -1,0 +1,134 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Holiday</strong></div>
+      <div class="card-body">
+        <form [formGroup]="createHolidayForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="title"
+                >Title<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  class="form-control"
+                  placeholder="Title"
+                  formControlName="title"
+                />
+                <div *ngIf="title.invalid && title.touched">
+                  <small class="text-danger" *ngIf="title.errors?.required">
+                    Please Enter Title
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="from_date"
+                >From Date<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  class="form-control"
+                  id="from_date"
+                  formControlName="from_date"
+                  type="text"
+                  (change)="onDateChanged()"
+                  name="from_date"
+                  placeholder="From Date"
+                />
+              </div>
+              <div *ngIf="from_date.invalid && from_date.touched">
+                <small class="text-danger" *ngIf="from_date.errors?.required">
+                  Please Enter From Date
+                </small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="to_date"
+                >To Date<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  class="form-control"
+                  id="to_date"
+                  formControlName="to_date"
+                  type="text"
+                  (change)="onDateChanged()"
+                  name="to_date"
+                  placeholder="To Date"
+                />
+              </div>
+              <div *ngIf="to_date.invalid && to_date.touched">
+                <small class="text-danger" *ngIf="to_date.errors?.required">
+                  Please Enter To Date
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="photo_name">Photo</label>
+              <input
+                type="file"
+                id="photo_name"
+                class="form-control"
+                placeholder="photo"
+                (change)="onSelectPhoto($event)"
+              />
+              <input
+                type="hidden"
+                class="form-control"
+                formControlName="photo"
+              />
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="details"
+                >Details<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <textarea
+                  class="form-control"
+                  id="details"
+                  formControlName="details"
+                  type="text"
+                  name="details"
+                  placeholder="Details"
+                ></textarea>
+              </div>
+              <div *ngIf="details.invalid && details.touched">
+                <small class="text-danger" *ngIf="details.errors?.required">
+                  Please Enter Details
+                </small>
+              </div>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="addHoliday()"
+            [disabled]="createHolidayForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            Add Event
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetHoliday()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

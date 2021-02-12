@@ -1,0 +1,41 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <strong class="col-form-label"> Student Group</strong>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <a
+                *ngIf="enableAdd"
+                [routerLink]="[
+                  '/administrator/student-group/add-student-group'
+                ]"
+              >
+                <i class=" icon-plus  m-1">Add Student Group</i>
+              </a>
+              <div class="exp_btn" id="btn_csv">
+                <button (click)="onBtnExport()">CSV</button>
+                <button (click)="onBtnExportExcel()">Excel</button>
+              </div>
+            </div>
+          </div>
+          <ag-grid-angular
+            #agGrid
+            style="width: 100%; height: 400px;"
+            suppressCellSelection="true"
+            class="ag-theme-balham"
+            [rowData]="StudentGroupList"
+            [columnDefs]="columnDefs"
+            rowHeight="50"
+            pagintion="true"
+            paginationPageSize="5"
+          >
+          </ag-grid-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

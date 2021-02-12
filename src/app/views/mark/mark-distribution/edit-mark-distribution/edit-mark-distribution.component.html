@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Mark Distribution</strong></div>
+      <div class="card-body">
+        <form [formGroup]="createMarkDistributionForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="mark_distribution_type"
+                >Mark Distribution Type<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="mark_distribution_type"
+                  name="mark_distribution_type"
+                  class="form-control"
+                  placeholder="Mark Distribution Type"
+                  formControlName="mark_distribution_type"
+                />
+                <div
+                  *ngIf="
+                    mark_distribution_type.invalid &&
+                    mark_distribution_type.touched
+                  "
+                >
+                  <small
+                    class="text-danger"
+                    *ngIf="mark_distribution_type.errors?.required"
+                  >
+                    Please Enter Mark Distribution Type
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="mark_value"
+                >Mark Value <span class="text-danger">*</span></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="mark_value"
+                  name="mark_value"
+                  class="form-control"
+                  placeholder="Mark Value"
+                  formControlName="mark_value"
+                />
+                <div *ngIf="mark_value.invalid && mark_value.touched">
+                  <small
+                    class="text-danger"
+                    *ngIf="mark_value.errors?.required"
+                  >
+                    Please Enter Mark Value
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="editMarkDistribution()"
+            [disabled]="createMarkDistributionForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            Edit Mark Distribution
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetMarkDistribution()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

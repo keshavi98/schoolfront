@@ -1,0 +1,161 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="well">
+      <div class="row">
+        <div classs="col-sm-6">
+          <button class="btn-cs btn-sm-cs">
+            <span class="fa fa-print"></span> Print
+          </button>
+          <a
+            href="https://demo.inilabs.net/school/v4.4/student/print_preview/1/1"
+            class="btn-cs btn-sm-cs"
+            style="text-decoration: none;"
+            role="button"
+            target="_blank"
+            ><i class="fa fa-file"></i> PDF Preview</a
+          >
+          <a
+            href="https://demo.inilabs.net/school/v4.4/student/edit/1/1"
+            class="btn-cs btn-sm-cs"
+            style="text-decoration: none;"
+            role="button"
+            ><i class="fa fa-edit"></i> Edit</a
+          >
+          <button
+            class="btn-cs btn-sm-cs"
+            data-toggle="modal"
+            data-target="#mail"
+          >
+            <span class="fa fa-envelope-o"></span> Send Pdf to Mail
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="printablediv">
+      <div class="row">
+        <div class="col-sm-3">
+          <div
+            class="box box-primary"
+            style="background-color: white; padding: 15px;"
+          >
+            <div class="box-body box-profile">
+              <!-- <img
+                    src="http://192.168.1.46:3000/student/photo/1581322946326.jpeg"
+                  /> -->
+              <img
+                class="profile-user-img img-responsive img-circle"
+                [src]="apiUrl + studentview?.photo"
+                alt=""
+              />
+              <h3 class="profile-username text-center">
+                {{ studentview?.student_name }}
+              </h3>
+              <p class="text-muted text-center">Student</p>
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Register NO</b>
+                  <a class="pull-right">{{ studentview?.register_no }}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Roll</b>
+                  <a class="pull-right">{{ studentview?.roll_no }}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Class</b>
+                  <a class="pull-right">{{ studentview?.class.class }}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Section</b>
+                  <a class="pull-right">{{ studentview?.section.section }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div class="nav-tabs-custom ">
+            <ul class="nav nav-tabs">
+              <li class="active">
+                <a class="tabmenu">Attendance</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div
+                class="tab-pane"
+                class="active"
+                style="margin:10px 10px 10px 10px ;"
+              >
+                <div *ngFor="let data of attendanceview">
+                  {{ data._id }}
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div
+                        class="studentDIV mCustomScrollbar _mCS_3 mCS_no_scrollbar"
+                      >
+                        <div
+                          id="mCSB_3"
+                          class="mCustomScrollBox mCS-light mCSB_horizontal mCSB_inside"
+                          tabindex="0"
+                          style="max-height: none;"
+                        >
+                          <div
+                            id="mCSB_3_container"
+                            class="mCSB_container mCS_x_hidden mCS_no_scrollbar_x"
+                            style="position: relative; top: 0px; left: 0px; width: 100%;"
+                            dir="ltr"
+                          >
+                            <table class="attendance_table">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th *ngFor="let date of arrDate">
+                                    {{ date }}
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let month of arrMonth">
+                                  <td>{{ month.month }}</td>
+                                  <ng-container *ngFor="let date of arrDate">
+                                    <td
+                                      [ngClass]="
+                                        arrAttendanceData[data._id][month.id][
+                                          date
+                                        ]['type']
+                                      "
+                                    >
+                                      {{
+                                        arrAttendanceData[data._id][month.id][
+                                          date
+                                        ]["label"]
+                                      }}
+                                    </td>
+                                  </ng-container>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <p class="totalattendanceCount">
+                        Total Holiday:{{ holiday }}, Total Weekend:{{
+                          weekend
+                        }}, Total Leave:{{ leaveapply }}, Total Present:{{
+                          present
+                        }}, Total Late With Excuse:{{ le }}, Total Late:{{
+                          lp
+                        }}, Total Absent:{{ absent }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

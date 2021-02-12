@@ -1,0 +1,231 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>System Admin</strong></div>
+      <div class="card-body">
+        <form [formGroup]="createSystemAdminForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="photo_name">Photo</label>
+              <input
+                type="file"
+                id="photo_name"
+                class="form-control"
+                placeholder="photo"
+                (change)="onSelectPhoto($event)"
+              />
+              <input
+                type="hidden"
+                class="form-control"
+                formControlName="photo"
+              />
+            </div>
+
+            <div class="col-md-4">
+              <label class="col-form-label" for="name"
+                >Name<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="name"
+                  formControlName="name"
+                  name="name"
+                  class="form-control"
+                  placeholder="Name"
+                />
+              </div>
+
+              <div *ngIf="name.invalid && name.touched">
+                <small class="text-danger" *ngIf="name.errors?.required">
+                  Please Enter Name
+                </small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="dob"
+                >Date Of Birth<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  class="form-control"
+                  id="dob"
+                  formControlName="dob"
+                  type="text"
+                  (change)="onDateChanged()"
+                  name="dob"
+                  placeholder="Date Of Birth"
+                />
+              </div>
+              <div *ngIf="dob.invalid && dob.touched">
+                <small class="text-danger" *ngIf="dob.errors?.required">
+                  Please Enter Date of Birth
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="gender">Gender</label>
+              <div class="">
+                <select class="form-control" formControlName="gender">
+                  <option value="">----Select----</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="religion">Religion </label>
+              <div class="">
+                <input
+                  type="text"
+                  id="religion"
+                  formControlName="religion"
+                  name="religion"
+                  class="form-control"
+                  placeholder="Religion"
+                />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="email"
+                >Email <samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  type="email"
+                  id="email"
+                  formControlName="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Email "
+                  autocomplete="Email "
+                />
+              </div>
+              <div *ngIf="email.invalid && email.touched">
+                <small class="text-danger" *ngIf="email.errors?.required">
+                  Please Enter valid Email
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="phone">Phone</label>
+              <div class="">
+                <input
+                  type="text"
+                  id="phone"
+                  formControlName="phone"
+                  name="phone"
+                  class="form-control"
+                  placeholder="Phone"
+                />
+              </div>
+            </div>
+            <div class="col-md-8">
+              <label class="col-form-label" for="address">Address </label>
+              <div class="">
+                <input
+                  type="text"
+                  id="address"
+                  formControlName="address"
+                  name="address"
+                  class="form-control"
+                  placeholder="Address "
+                />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="joining_date"
+                >Joining Date<samp class="text-danger">*</samp>
+              </label>
+
+              <div class="">
+                <input
+                  class="form-control"
+                  id="joining_date"
+                  formControlName="joining_date"
+                  type="date"
+                  name="joining_date"
+                  placeholder="Joining Date"
+                />
+              </div>
+              <div *ngIf="joining_date.invalid && joining_date.touched">
+                <small
+                  class="text-danger"
+                  *ngIf="joining_date.errors?.required"
+                >
+                  Please Enter Joining Date
+                </small>
+              </div>
+            </div>
+
+            <div class="col-md-4"></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="username"
+                >Username<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="username"
+                  formControlName="username"
+                  name="username"
+                  class="form-control"
+                  placeholder="Username"
+                />
+              </div>
+              <div *ngIf="username.invalid && username.touched">
+                <small class="text-danger" *ngIf="username.errors?.required">
+                  Please Enter Username
+                </small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="password"
+                >Password<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  type="password"
+                  id="password"
+                  formControlName="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="Password"
+                />
+              </div>
+              <div *ngIf="password.invalid && password.touched">
+                <small class="text-danger" *ngIf="password.errors?.required">
+                  Please Enter Password
+                </small>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="addAdmin()"
+            [disabled]="createSystemAdminForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>Add System Admin
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetSystemAdmin()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

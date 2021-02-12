@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="well">
+      <div class="row">
+        <div classs="col-sm-6">
+          <button class="btn-cs btn-sm-cs">
+            <span class="fa fa-print"></span> Print
+          </button>
+          <a
+            href="https://demo.inilabs.net/school/v4.4/student/print_preview/1/1"
+            class="btn-cs btn-sm-cs"
+            style="text-decoration: none;"
+            role="button"
+            target="_blank"
+            ><i class="fa fa-file"></i> PDF Preview</a
+          >
+          <a
+            href="https://demo.inilabs.net/school/v4.4/student/edit/1/1"
+            class="btn-cs btn-sm-cs"
+            style="text-decoration: none;"
+            role="button"
+            [routerLink]="[
+              '/announcement/holiday/edit-holiday',
+              holidayview?._id
+            ]"
+            ><i class="fa fa-edit"></i> Edit</a
+          >
+          <button
+            class="btn-cs btn-sm-cs"
+            data-toggle="modal"
+            data-target="#mail"
+          >
+            <span class="fa fa-envelope-o"></span> Send Pdf to Mail
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="printablediv">
+      <section
+        class="panel"
+        style="margin-bottom: 20px;
+        background-color: #fff;
+        border: 0px solid transparent;
+        border-radius: 4px"
+      >
+        <div
+          class="profile-view-head-cover "
+          [ngStyle]="{
+            'background-image': 'url(' + apiUrl + holidayview?.photo + ')'
+          }"
+        >
+          <h1 class="img-thumbnail picture-left">
+            10 Jun
+          </h1>
+          <h1 class="img-thumbnail picture-right">
+            20 Jun
+          </h1>
+        </div>
+        <div class="panel-body profile-view-dis">
+          <div class="text-center">
+            <h1>{{ holidayview?.title }}</h1>
+            <h4>
+              {{ holidayview?.start_date }}<b>to</b>{{ holidayview?.end_date }}
+            </h4>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3" style="margin-left: 25%;">
+              <span xss="removed"></span
+              ><b xss="removed">{{ holidayview?.details }}</b
+              ><span xss="removed"
+                >&nbsp;(also known as a hack day, hackfest or codefest) is a
+                design sprint-like event in which computer programmers and
+                others involved in software development, including graphic
+                designers, interface designers, project managers, and others,
+                often including subject-matter-experts, collaborate intensively
+                on</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

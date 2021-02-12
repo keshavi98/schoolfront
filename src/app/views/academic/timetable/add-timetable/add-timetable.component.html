@@ -1,0 +1,237 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Timetable</strong></div>
+      <div class="card-body">
+        <form [formGroup]="createTimetableForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="year"
+                >Year<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="year">
+                  <option value="" selected disabled>--Select--</option>
+                  <option
+                    *ngFor="let data of AcademicyearList"
+                    value="{{ data._id }}"
+                    title="{{ data.year }}"
+                    >{{ data.year }}</option
+                  >
+                  <div *ngIf="year.invalid && year.touched">
+                    <small class="text-danger" *ngIf="year.errors?.required">
+                      Please Enter Year
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="class"
+                >Class<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select
+                  class="form-control"
+                  formControlName="class"
+                  (change)="onClassChanged()"
+                >
+                  <option value="" selected disabled>--Select--</option>
+                  <option
+                    *ngFor="let data of ClassList"
+                    value="{{ data._id }}"
+                    title="{{ data.class }}"
+                    >{{ data.class }}</option
+                  >
+                  <div *ngIf="class.invalid && class.touched">
+                    <small class="text-danger" *ngIf="class.errors?.required">
+                      Please Enter Class
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="section">Section</label>
+              <div class="">
+                <select class="form-control" formControlName="section">
+                  <option value="" selected disabled>---Select---</option>
+                  <ng-container *ngFor="let data of classSectionList">
+                    <option value="{{ data._id }}" title="{{ data.section }}">{{
+                      data.section
+                    }}</option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="col-form-label" for="subject"
+                >Subject<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select
+                  class="form-control"
+                  formControlName="subject"
+                  (change)="onSubjectChanged()"
+                >
+                  <option value="" selected disabled>---Select---</option>
+                  <ng-container *ngFor="let data of classSubjectList">
+                    <option value="{{ data._id }}" title="{{ data.subject }}">{{
+                      data.subject_name
+                    }}</option>
+                    <div *ngIf="subject.invalid && subject.touched">
+                      <small
+                        class="text-danger"
+                        *ngIf="subject.errors?.required"
+                      >
+                        Please Enter Subject
+                      </small>
+                    </div>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="day"
+                >Day<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="day">
+                  <option value="" selected disabled>---Select---</option>
+                  <ng-container>
+                    <option>MONDAY</option>
+                    <option>TUESDAY</option>
+                    <option>WEDNESDAY</option>
+                    <option>THURSDAY</option>
+                    <option>FRIDAY</option>
+                    <option>SATURDAY</option>
+
+                    <div *ngIf="day.invalid && day.touched">
+                      <small class="text-danger" *ngIf="day.errors?.required">
+                        Please Enter Day
+                      </small>
+                    </div>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="col-form-label" for="teacher"
+                >Teacher<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="teacher">
+                  <option value="" selected disabled>---Select---</option>
+                  <ng-container *ngFor="let data of subjectTeacherList">
+                    <option value="{{ data._id }}" title="{{ data.name }}">{{
+                      data.name
+                    }}</option>
+                    <div *ngIf="teacher.invalid && teacher.touched">
+                      <small
+                        class="text-danger"
+                        *ngIf="teacher.errors?.required"
+                      >
+                        Please Enter Teacher
+                      </small>
+                    </div>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="start_time"
+                >Starting Time<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  class="form-control"
+                  id="start_time"
+                  formControlName="start_time"
+                  type="text"
+                  name="start_time"
+                  (change)="onDateChanged()"
+                  placeholder="Starting Date"
+                />
+              </div>
+              <div *ngIf="start_time.invalid && start_time.touched">
+                <small class="text-danger" *ngIf="start_time.errors?.required">
+                  Please Enter Starting Time
+                </small>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="col-form-label" for="end_time"
+                >Ending Time<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  class="form-control"
+                  id="end_time"
+                  formControlName="end_time"
+                  type="text"
+                  name="end_time"
+                  (change)="onDateChanged()"
+                  placeholder="Ending  Date"
+                />
+              </div>
+              <div *ngIf="end_time.invalid && end_time.touched">
+                <small class="text-danger" *ngIf="end_time.errors?.required">
+                  Please Enter Ending Time
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="room"
+                >Room<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  class="form-control"
+                  id="room"
+                  formControlName="room"
+                  type="text"
+                  name="room"
+                  placeholder="Room"
+                />
+              </div>
+              <div *ngIf="room.invalid && room.touched">
+                <small class="text-danger" *ngIf="room.errors?.required">
+                  Please Enter Room
+                </small>
+              </div>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="addTimetable()"
+            [disabled]="createTimetableForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            Add Timetable
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetTimetable()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

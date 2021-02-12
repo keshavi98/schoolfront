@@ -1,0 +1,120 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Year</strong></div>
+      <div class="card-body">
+        <form [formGroup]="createAcademicYearForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="year"
+                >Year<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="year"
+                  name="year"
+                  class="form-control"
+                  placeholder="Year"
+                  formControlName="year"
+                />
+                <div *ngIf="year.invalid && year.touched">
+                  <small class="text-danger" *ngIf="year.errors?.required">
+                    Please Enter Year
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="year_title">Year Title </label>
+              <div class="">
+                <input
+                  type="text"
+                  id="year_title"
+                  name="year_title"
+                  class="form-control"
+                  placeholder="Year Title"
+                  formControlName="year_title"
+                />
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="start_date"
+                >Starting Date<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  class="form-control"
+                  id="start_date"
+                  formControlName="start_date"
+                  type="text"
+                  name="start_date"
+                  (change)="onDateChanged()"
+                  placeholder="Starting Date"
+                />
+              </div>
+              <div *ngIf="start_date.invalid && start_date.touched">
+                <small class="text-danger" *ngIf="start_date.errors?.required">
+                  Please Enter Starting Date
+                </small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="end_date"
+                >Ending Date<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  class="form-control"
+                  id="end_date"
+                  formControlName="end_date"
+                  type="text"
+                  (change)="onDateChanged()"
+                  name="end_date"
+                  placeholder="Ending Date"
+                />
+              </div>
+              <div *ngIf="end_date.invalid && end_date.touched">
+                <small class="text-danger" *ngIf="end_date.errors?.required">
+                  Please Enter Ending Date
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="status">Status</label>
+              <div class="">
+                <select class="form-control" formControlName="status">
+                  <option value="" selected disabled>-----Select-----</option>
+                  <option value="0">In Active</option>
+                  <option value="1">Active</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="editAcademicYear()"
+            [disabled]="createAcademicYearForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            Edit Year
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetAcademicYear()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

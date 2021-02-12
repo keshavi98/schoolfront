@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Exam</strong></div>
+      <div class="card-body">
+        <form [formGroup]="createExamForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="examname"
+                >Exam Name<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="examname"
+                  name="examname"
+                  class="form-control"
+                  placeholder="Exam Name"
+                  formControlName="examname"
+                />
+                <div *ngIf="examname.invalid && examname.touched">
+                  <small class="text-danger" *ngIf="examname.errors?.required">
+                    Please Enter Exam Name
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="date"
+                >Date<span class="text-danger">*</span>
+              </label>
+              <div class="">
+                <input
+                  id="date"
+                  name="date"
+                  type="text"
+                  class="form-control"
+                  placeholder="Date"
+                  (change)="onDateChanged()"
+                  formControlName="date"
+                />
+                <div *ngIf="date.invalid && date.touched">
+                  <small class="text-danger" *ngIf="date.errors?.required">
+                    Please Enter Date
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-md-3 col-form-label" for="note">Note </label>
+              <div class="">
+                <textarea
+                  type="text"
+                  id="note"
+                  name="note"
+                  class="form-control"
+                  placeholder="Note"
+                  formControlName="note"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="addExam()"
+            [disabled]="createExamForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            Add Exam
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetExam()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <strong class="col-form-label">Student</strong>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <a *ngIf="enableAdd" [routerLink]="['/student/add-student/']">
+                <i class=" icon-plus  m-1"> Add Student</i>
+              </a>
+              <div class="exp_btn" id="btn_csv">
+                <button (click)="onBtnExport()">CSV</button>
+                <button (click)="onBtnExportExcel()">Excel</button>
+                <!-- <button (click)="onBtnExportCopy()">
+                  Copy Selected
+                </button> -->
+              </div>
+            </div>
+          </div>
+
+          <ag-grid-angular
+            #agGrid
+            style="width: 100%; height: 400px;"
+            suppressCellSelection="true"
+            class="ag-theme-balham"
+            [rowData]="StudentList"
+            [columnDefs]="columnDefs"
+            rowHeight="50"
+            pagination="true"
+            *ngIf="permissionSet"
+          >
+          </ag-grid-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,202 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Subject</strong></div>
+      <div class="card-body">
+        <form [formGroup]="createSubjectForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="class"
+                >Class Name<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="class">
+                  <option
+                    *ngFor="let data of ClassList"
+                    value="{{ data._id }}"
+                    title="{{ data.class }}"
+                    >{{ data.class }}</option
+                  >
+                  <div *ngIf="class.invalid && class.touched">
+                    <small class="text-danger" *ngIf="class.errors?.required">
+                      Please Enter Class
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="teacher"
+                >Teacher Name <span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="teacher">
+                  <option
+                    *ngFor="let data of TeacherList"
+                    value="{{ data._id }}"
+                    title="{{ data.name }}"
+                    >{{ data.name }}</option
+                  >
+                  <div *ngIf="teacher.invalid && teacher.touched">
+                    <small class="text-danger" *ngIf="teacher.errors?.required">
+                      Please Enter Teacher Name
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="type"
+                >Type<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="type">
+                  <option value="optional">Optional</option>
+                  <option value="mandatory">Mandatory</option>
+                  <div *ngIf="type.invalid && type.touched">
+                    <small class="text-danger" *ngIf="type.errors?.required">
+                      Please Enter Type
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="pass_mark"
+                >Pass Mark<span class="text-danger">*</span>
+              </label>
+              <div class="">
+                <input
+                  type="text"
+                  id="pass_mark"
+                  name="pass_mark"
+                  class="form-control"
+                  placeholder="pass_mark"
+                  formControlName="pass_mark"
+                />
+                <div *ngIf="pass_mark.invalid && pass_mark.touched">
+                  <small class="text-danger" *ngIf="pass_mark.errors?.required">
+                    Please Enter Capacity
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="final_mark"
+                >Final Mark <span class="text-danger">*</span>
+              </label>
+              <div class="">
+                <input
+                  type="text"
+                  id="final_mark"
+                  name="final_mark"
+                  class="form-control"
+                  placeholder="final_mark"
+                  formControlName="final_mark"
+                />
+                <div *ngIf="final_mark.invalid && final_mark.touched">
+                  <small
+                    class="text-danger"
+                    *ngIf="final_mark.errors?.required"
+                  >
+                    Please Enter Final Mark
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="subject_name"
+                >Subject Name<span class="text-danger">*</span>
+              </label>
+              <div class="">
+                <input
+                  type="text"
+                  id="subject_name"
+                  name="subject_name"
+                  class="form-control"
+                  placeholder="subject_name"
+                  formControlName="subject_name"
+                />
+                <div *ngIf="subject_name.invalid && subject_name.touched">
+                  <small
+                    class="text-danger"
+                    *ngIf="subject_name.errors?.required"
+                  >
+                    Please Enter Subject_code
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="col-form-label" for="subject_author"
+                >Subject Author
+              </label>
+              <div class="">
+                <input
+                  type="text"
+                  id="subject_author"
+                  name="subject_author"
+                  class="form-control"
+                  placeholder="subject_author"
+                  formControlName="subject_author"
+                />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class=" col-form-label" for="subject_code"
+                >Subject Code<span class="text-danger">*</span>
+              </label>
+              <div class="">
+                <input
+                  type="text"
+                  id="subject_code"
+                  name="subject_code"
+                  class="form-control"
+                  placeholder="subject_code"
+                  formControlName="subject_code"
+                />
+                <div *ngIf="subject_code.invalid && subject_code.touched">
+                  <small
+                    class="text-danger"
+                    *ngIf="subject_code.errors?.required"
+                  >
+                    Please Enter Subject_code
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button
+          type="submit"
+          class="btn btn-sm btn-primary"
+          (click)="editSubject()"
+          [disabled]="createSubjectForm.invalid"
+        >
+          <i class="fa fa-dot-circle-o"></i>
+          Edit Subject
+        </button>
+        <button
+          type="reset"
+          class="btn btn-sm btn-danger"
+          (click)="resetSubject()"
+        >
+          <i class="fa fa-ban"></i> Reset
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

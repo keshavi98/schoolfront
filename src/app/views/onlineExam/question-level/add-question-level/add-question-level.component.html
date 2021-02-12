@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Question Level</strong></div>
+      <div class="card-body">
+        <form [formGroup]="createQuestionLevelForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="title"
+                >Title<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  class="form-control"
+                  placeholder="Title"
+                  formControlName="title"
+                />
+                <div *ngIf="title.invalid && title.touched">
+                  <small class="text-danger" *ngIf="title.errors?.required">
+                    Please Enter Title
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="addQuestionLevel()"
+            [disabled]="createQuestionLevelForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            Add Level
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetLevel()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

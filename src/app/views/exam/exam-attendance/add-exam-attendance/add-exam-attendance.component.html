@@ -1,0 +1,191 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Exam Attendance</strong></div>
+      <div class="card-body">
+        <form [formGroup]="getExamAttendanceForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="examname"
+                >Exam Name<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="examname">
+                  <option value="" selected disabled>--Select--</option>
+                  <option
+                    *ngFor="let data of ExamList"
+                    value="{{ data._id }}"
+                    title="{{ data.examname }}"
+                    >{{ data.examname }}</option
+                  >
+                  <div *ngIf="examname.invalid && examname.touched">
+                    <small
+                      class="text-danger"
+                      *ngIf="examname.errors?.required"
+                    >
+                      Please Enter Exam Name
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="class"
+                >Class<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select
+                  class="form-control"
+                  formControlName="class"
+                  (change)="onClassChanged()"
+                >
+                  <option value="" selected disabled>--Select--</option>
+                  <option
+                    *ngFor="let data of ClassList"
+                    value="{{ data._id }}"
+                    title="{{ data.class }}"
+                    >{{ data.class }}</option
+                  >
+                  <div *ngIf="class.invalid && class.touched">
+                    <small class="text-danger" *ngIf="class.errors?.required">
+                      Please Enter Class
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="section">Section</label>
+              <div class="">
+                <select class="form-control" formControlName="section">
+                  <option value="" selected disabled>---Select---</option>
+                  <ng-container *ngFor="let data of classSectionList">
+                    <option value="{{ data._id }}" title="{{ data.section }}">{{
+                      data.section
+                    }}</option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="col-form-label" for="subject"
+                >Subject<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="subject">
+                  <option value="" selected disabled>---Select---</option>
+                  <ng-container *ngFor="let data of classSubjectList">
+                    <option value="{{ data._id }}" title="{{ data.subject }}">{{
+                      data.subject_name
+                    }}</option>
+                    <div *ngIf="subject.invalid && subject.touched">
+                      <small
+                        class="text-danger"
+                        *ngIf="subject.errors?.required"
+                      >
+                        Please Enter Subject
+                      </small>
+                    </div>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row"></div>
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="getExamAttendance()"
+            [disabled]="getExamAttendanceForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            Attendance
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetExamattendance()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+        <table
+          class="table table-striped"
+          [svData]="ExamAttendanceList"
+          #sv="svDataTable"
+          [svRowsOnPage]="5"
+          svSortBy="name"
+          svSortOrder="asc"
+        >
+          <thead>
+            <tr>
+              <th>Photo</th>
+              <th>Name</th>
+              <th>Section</th>
+              <th>Email</th>
+              <th>Roll No</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of sv.data; let i = index">
+              <td style="vertical-align: top; ">
+                <img
+                  class="photo"
+                  src="{{ apiUrl }}{{ data.photo }}"
+                  style="width: 50px;
+                  height: 50px;
+                  border-radius: 50%;"
+                />
+              </td>
+              <td>{{ data?.student_name }}</td>
+              <td>{{ data?.section }}</td>
+              <td>{{ data?.email }}</td>
+              <td>{{ data?.roll_no }}</td>
+
+              <td class="action">
+                <div
+                  class="checkbox"
+                  style="
+                  margin-left: 24px;
+                  margin-top: -5px;
+                  line-height: normal;
+                  display: inline-block;
+                  vertical-align: middle;"
+                >
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    [(ngModel)]="data.attendance"
+                  />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="12">
+                <sv-bootstrap-paginator
+                  [rowsOnPageSet]="[5, 10, 25]"
+                ></sv-bootstrap-paginator>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+        <button
+          type="submit"
+          class="btn btn-sm btn-primary"
+          (click)="setExamAttendance()"
+        >
+          <i class="fa fa-dot-circle-o"></i>
+          Attendance
+        </button>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

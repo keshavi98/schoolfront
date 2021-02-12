@@ -1,0 +1,714 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="well">
+      <div class="row">
+        <div classs="col-sm-6">
+          <button class="btn-cs btn-sm-cs" (click)="printPage()">
+            <span class="fa fa-print"></span> Print
+          </button>
+          <a
+            href=""
+            class="btn-cs btn-sm-cs"
+            style="text-decoration: none;"
+            role="button"
+            target="_blank"
+            ><i class="fa fa-file"></i> PDF Preview</a
+          >
+          <a
+            href=""
+            class="btn-cs btn-sm-cs"
+            style="text-decoration: none;"
+            role="button"
+            [routerLink]="['/student/edit-student/', studentview?._id]"
+            ><i class="fa fa-edit"></i> Edit</a
+          >
+          <button
+            class="btn-cs btn-sm-cs"
+            data-toggle="modal"
+            data-target="#mail"
+          >
+            <span class="fa fa-envelope-o"></span> Send Pdf to Mail
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="printablediv">
+      <div class="row">
+        <div class="col-sm-3">
+          <div
+            class="box box-primary"
+            style="background-color: white; padding: 15px;"
+          >
+            <div class="box-body box-profile">
+              <!-- <img
+                src="http://192.168.1.46:3000/student/photo/1581322946326.jpeg"
+              /> -->
+              <img
+                class="profile-user-img img-responsive img-circle"
+                [src]="apiUrl + studentview?.photo"
+                alt=""
+              />
+              <h3 class="profile-username text-center">
+                {{ studentview?.student_name }}
+              </h3>
+              <p class="text-muted text-center">Student</p>
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Register NO</b>
+                  <a class="pull-right">{{ studentview?.register_no }}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Roll</b>
+                  <a class="pull-right">{{ studentview?.roll_no }}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Class</b>
+                  <a class="pull-right">{{ studentview?.class.class }}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Section</b>
+                  <a class="pull-right">{{ studentview?.section.section }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li [ngClass]="activeTab == 1 ? 'active' : ''">
+                <a (click)="switchTab(1)" class="tabmenu">Profile </a>
+              </li>
+              <li [ngClass]="activeTab == 2 ? 'active' : ''">
+                <a (click)="switchTab(2)" class="tabmenu">Parents</a>
+              </li>
+              <li [ngClass]="activeTab == 3 ? 'active' : ''">
+                <a (click)="switchTab(3)" class="tabmenu" *ngIf="role != 2 && role != 4"
+                  >Timetable</a
+                >
+              </li>
+              <li [ngClass]="activeTab == 4 ? 'active' : ''">
+                <a (click)="switchTab(4)" class="tabmenu" *ngIf="role != 2 && role != 4"
+                  >Attendance</a
+                >
+              </li>
+              <li [ngClass]="activeTab == 5 ? 'active' : ''">
+                <a (click)="switchTab(5)" class="tabmenu" *ngIf="role != 2 && role != 4"
+                  >Mark</a
+                >
+              </li>
+              <li [ngClass]="activeTab == 6 ? 'active' : ''">
+                <a (click)="switchTab(6)" class="tabmenu" *ngIf="role != 2 && role != 4"
+                  >Invoice</a
+                >
+              </li>
+              <li [ngClass]="activeTab == 7 ? 'active' : ''">
+                <a (click)="switchTab(7)" class="tabmenu" *ngIf="role != 2 && role != 4"
+                  >Payment</a
+                >
+              </li>
+              <li [ngClass]="activeTab == 8 ? 'active' : ''">
+                <a (click)="switchTab(8)" class="tabmenu" *ngIf="role != 2 && role != 4 "
+                  >Document</a
+                >
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane" [ngClass]="activeTab == 1 ? 'active' : ''">
+                <div class="panel-body profile-view-dis">
+                  <div class="row">
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                    padding: 0 15px;"
+                    >
+                      <p style="margin: 0 0 10px;">
+                        <span class="title">Group</span>:{{
+                          studentview?.group.group
+                        }}
+                      </p>
+                    </div>
+                    <div class="profile-view-tab" style="width: 50%;">
+                      <p>
+                        <span class="title">Optional Subject</span>:{{
+                          studentview?.optional_subject.subject_name
+                        }}
+                      </p>
+                    </div>
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                    padding: 0 15px;"
+                    >
+                      <p>
+                        <span class="title">Date of Birth</span>:{{
+                          studentview?.dob
+                        }}
+                      </p>
+                    </div>
+                    <div class="profile-view-tab" style="width: 50%;">
+                      <p>
+                        <span class="title">Gender</span>:{{
+                          studentview?.gender
+                        }}
+                      </p>
+                    </div>
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                  padding: 0 15px;"
+                    >
+                      <p>
+                        <span class="title">Blood Group</span>:{{
+                          studentview?.blood_group
+
+
+                        }}
+                      </p>
+                    </div>
+                    <div class="profile-view-tab" style="width: 50%;">
+                      <p>
+                        <span class="title">Religion</span>:{{
+                          studentview?.religion
+                        }}
+                      </p>
+                    </div>
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                padding: 0 15px;"
+                    >
+                      <p>
+                        <span class="title">Email</span>:{{
+                          studentview?.email
+                        }}
+                      </p>
+                    </div>
+                    <div class="profile-view-tab" style="width: 50%;">
+                      <p>
+                        <span class="title">Phone</span>:{{
+                          studentview?.phone
+                        }}
+                      </p>
+                    </div>
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                padding: 0 15px;"
+                    >
+                      <p>
+                        <span class="title">State</span>:{{
+                          studentview?.state
+                        }}
+                      </p>
+                    </div>
+                    <div class="profile-view-tab" style="width: 50%;">
+                      <p>
+                        <span class="title">Country</span>:{{
+                          studentview?.country
+                        }}
+                      </p>
+                    </div>
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                padding: 0 15px;"
+                    >
+                      <p>
+                        <span class="title"> Remarks</span>:{{
+                          studentview?.remark
+                        }}
+                      </p>
+                    </div>
+                    <div class="profile-view-tab" style="width: 50%;">
+                      <p>
+                        <span class="title">Username</span>:{{
+                          studentview?.country
+                        }}
+                      </p>
+                    </div>
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                padding: 0 15px;"
+                    >
+                      <p>
+                        <span class="title" style="display: inline-block;"
+                          >Extra Curricular Activities</span
+                        >:{{ studentview?.extra_activities }}
+                      </p>
+                    </div>
+                    <div class="profile-view-tab" style="width: 50%;">
+                      <p>
+                        <span class="title">Address</span>:{{
+                          studentview?.address
+                        }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane" [ngClass]="activeTab == 2 ? 'active' : ''">
+                <div class="panel-body profile-view-dis">
+                  <div class="row">
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                    padding: 0 15px;"
+                    >
+                      <p style="margin: 0 0 10px;">
+                        <span class="title">Guardian</span>:{{
+                          parentsview?.guardian_name
+                        }}
+                      </p>
+                    </div>
+
+                    <div class="profile-view-tab" style="width: 50%;">
+                      <p>
+                        <span class="title">Father's Name</span>:{{
+                          parentsview?.father_name
+                        }}
+                      </p>
+                    </div>
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                    padding: 0 15px;"
+                    >
+                      <p style="margin: 0 0 10px;">
+                        <span class="title">Mother's Name</span>:{{
+                          parentsview?.mother_name
+                        }}
+                      </p>
+                    </div>
+                    <div class="profile-view-tab" style="width: 50%;">
+                      <p>
+                        <span class="title">Father's Profession</span>:{{
+                          parentsview?.father_profession
+                        }}
+                      </p>
+                    </div>
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                padding: 0 15px;"
+                    >
+                      <p style="margin: 0 0 10px;">
+                        <span class="title">Mother's Profession</span>:{{
+                          parentsview?.mother_profession
+                        }}
+                      </p>
+                    </div>
+                    <div class="profile-view-tab" style="width: 50%;">
+                      <p>
+                        <span class="title"> Email</span>:{{
+                          parentsview?.email
+                        }}
+                      </p>
+                    </div>
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                  padding: 0 15px;"
+                    >
+                      <p style="margin: 0 0 10px;">
+                        <span class="title">Phone</span>:{{
+                          parentsview?.phone
+                        }}
+                      </p>
+                    </div>
+                    <div class="profile-view-tab" style="width: 50%;">
+                      <p>
+                        <span class="title">Username</span>:{{
+                          parentsview?.user_id.username
+                        }}
+                      </p>
+                    </div>
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                padding: 0 15px;"
+                    >
+                      <p style="margin: 0 0 10px;">
+                        <span class="title">Address</span>:{{
+                          parentsview?.address
+                        }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" [ngClass]="activeTab == 3 ? 'active' : ''">
+                <div class="panel-body profile-view-dis">
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-responsive">
+                      <thead>
+                        <!-- <tr>
+                          <th class="text-center">Day</th>
+                          <th class="text-center">1st Period</th>
+                          <th class="text-center">2st Period</th>
+                          <th class="text-center">3st Period</th>
+                        </tr> -->
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of timetableview">
+                          <td>{{ data?._id }}</td>
+                          <td
+                            class="text-center"
+                            *ngFor="let docdata of data.doc"
+                          >
+                            <p style="margin: 0px 0px 1px">
+                              {{ docdata?.start_time }}{{ docdata?.end_time }}
+                            </p>
+                            <p style="margin: 0px 0px 1px">
+                              <span class="left">Subject :</span>
+                              <span class="right"
+                                >{{ (docdata?.subject_info)[0].subject_name }}
+                              </span>
+                            </p>
+                            <p style="margin: 0px 0px 1px">
+                              <span class="left">Teacher :</span>
+                              <span class="right">
+                                {{ (docdata?.teacher_info)[0].name }}</span
+                              >
+                            </p>
+                            <p style="margin: 0px 0px 1px">
+                              <span class="left">Room : </span
+                              ><span class="right">{{ docdata?.room }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" [ngClass]="activeTab == 4 ? 'active' : ''">
+                <!-- <h4>English</h4> -->
+                <div *ngFor="let data of attendanceview">
+                  {{ data._id }}
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div
+                        class="studentDIV mCustomScrollbar _mCS_3 mCS_no_scrollbar"
+                      >
+                        <div
+                          id="mCSB_3"
+                          class="mCustomScrollBox mCS-light mCSB_horizontal mCSB_inside"
+                          tabindex="0"
+                          style="max-height: none;"
+                        >
+                          <div
+                            id="mCSB_3_container"
+                            class="mCSB_container mCS_x_hidden mCS_no_scrollbar_x"
+                            style="position: relative; top: 0px; left: 0px; width: 100%;"
+                            dir="ltr"
+                          >
+                            <table class="attendance_table">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th *ngFor="let date of arrDate">
+                                    {{ date }}
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let month of arrMonth">
+                                  <td>{{ month.month }}</td>
+                                  <ng-container *ngFor="let date of arrDate">
+                                    <td
+                                      [ngClass]="
+                                        arrAttendanceData[data._id][month.id][
+                                          date
+                                        ]['type']
+                                      "
+                                    >
+                                      {{
+                                        arrAttendanceData[data._id][month.id][
+                                          date
+                                        ]["label"]
+                                      }}
+                                    </td>
+                                  </ng-container>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <p class="totalattendanceCount">
+                        Total Holiday:{{ holiday }}, Total Weekend:{{
+                          weekend
+                        }}, Total Leave:{{ leaveapply }}, Total Present:{{
+                          present
+                        }}, Total Late With Excuse:{{ le }}, Total Late:{{
+                          lp
+                        }}, Total Absent:{{ absent }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" [ngClass]="activeTab == 5 ? 'active' : ''">
+                <div
+                  class="box"
+                  *ngFor="let examObj of marksDataList"
+                  style="border-top: 1px solid #23292F;
+                border-left: 1px solid #23292F;
+                border-right: 1px solid #23292F;
+                border-bottom: 1px solid #23292F;"
+                >
+                  <div class="box-header" style="background-color:#FFFFFF;">
+                    <h3
+                      class="box-title"
+                      style="color:#23292F; color: #23292F;
+                    font-size: 14px;
+                    padding: 15px;
+                    display: inline-block;
+                    margin: 0;
+                    font-weight: 400;"
+                    >
+                      <!-- First Semester -->
+                      {{ examObj.exam }}
+                    </h3>
+                  </div>
+                  <div
+                    class="box-body mark-bodyID mCustomScrollbar _mCS_1 mCS_no_scrollbar"
+                    style="border-top:1px solid #23292F;"
+                  >
+                    <div
+                      id="mCSB_1"
+                      class="mCustomScrollBox mCS-light mCSB_horizontal mCSB_inside"
+                      style="max-height: none;"
+                      tabindex="0"
+                    >
+                      <div
+                        id="mCSB_1_container"
+                        class="mCSB_container mCS_x_hidden mCS_no_scrollbar_x"
+                        style="position: relative; top: 0px; left: 0px; width: 100%;"
+                        dir="ltr"
+                      >
+                        <table
+                          class="table table-bordered table-mark"
+                          style="width:100%"
+                        >
+                          <thead>
+                            <tr style="background-color: #a7c2d0;">
+                              <td rowspan="2">Subject</td>
+
+                              <td
+                                *ngFor="let marks_type of MarkDistributionList"
+                              >
+                                {{ marks_type.mark_distribution_type }}
+                                <!-- ({{ marks_type.mark_value }}) -->
+                              </td>
+                              <td colspan="3">Total</td>
+                            </tr>
+                            <tr>
+                              <td
+                                *ngFor="let marks_type of MarkDistributionList"
+                              >
+                                Obtained Mark
+                              </td>
+
+                              <td>Mark</td>
+                              <td>Point</td>
+                              <td>Grade</td>
+                            </tr>
+                            <tr
+                              *ngFor="
+                                let subjectObj of examObj.subjects;
+                                let i = index
+                              "
+                            >
+                              <td>
+                                {{ subjectObj?.subject }}
+                              </td>
+                              <td
+                                *ngFor="
+                                  let markObj of subjectObj.marks;
+                                  let j = index
+                                "
+                              >
+                                {{ markObj.val }}/
+                                {{ markObj.maxval }}
+                              </td>
+                              <td>{{ subjectObj.totalsubmark }}</td>
+                              <td>-</td>
+                              <td>-</td>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                        <div class="box-footer" style="padding-left:0px;">
+                          <p class="text-black">
+                            Total Marks :
+                            <span class="text-red text-bold">{{
+                              examObj.totalObtainedMarks
+                            }}</span>
+                            Total Obtained Marks :<span
+                              class="text-red text-bold"
+                              >{{ examObj.totalMarks }}</span
+                            >
+                          </p>
+                        </div>
+                      </div>
+                      <div
+                        id="mCSB_1_scrollbar_horizontal"
+                        class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_horizontal"
+                        style="display: none;"
+                      >
+                        <div class="mCSB_draggerContainer">
+                          <div
+                            id="mCSB_1_dragger_horizontal"
+                            class="mCSB_dragger"
+                            style="position: absolute; min-width: 30px; width: 0px; left: 0px;"
+                          >
+                            <div class="mCSB_dragger_bar"></div>
+                          </div>
+                          <div class="mCSB_draggerRail"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="tab-pane"
+                [ngClass]="activeTab == 6 ? 'active' : ''"
+              ></div>
+              <div
+                class="tab-pane"
+                [ngClass]="activeTab == 7 ? 'active' : ''"
+              ></div>
+              <div class="tab-pane" [ngClass]="activeTab == 8 ? 'active' : ''">
+                <ng-template #content let-modal>
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">
+                      Document Upload
+                    </h4>
+                    <button
+                      type="button"
+                      class="close"
+                      aria-label="Close"
+                      (click)="modal.dismiss('Cross click')"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form
+                      [formGroup]="createDocumentForm"
+                      action=""
+                      method="post"
+                      enctype="multipart/form-data"
+                      class="form-horizontal"
+                    >
+                      <div class="form-group">
+                        <label
+                          for="title"
+                          class="col-sm-2 control-label"
+                          style="float: left;"
+                        >
+                          Title <span class="text-red">*</span>
+                        </label>
+                        <div
+                          class="col-sm-6"
+                          style="float: left; margin-bottom: 10px;"
+                        >
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="title"
+                            id="title"
+                            name="title"
+                            placeholder="Title"
+                          />
+                        </div>
+                        <div *ngIf="title.invalid && title.touched">
+                          <small
+                            class="text-danger"
+                            *ngIf="title.errors?.required"
+                          >
+                            Please Enter Title
+                          </small>
+                        </div>
+                      </div>
+                      <div
+                        class="form-group"
+                        style="width: 100%; display:inline-block;"
+                      >
+                        <label
+                          for="file_name"
+                          class="col-sm-2 control-label"
+                          style="float: left;"
+                        >
+                          File <span class="text-red">*</span>
+                        </label>
+                        <div class="col-sm-6" style="float: left;">
+                          <input
+                            type="file"
+                            id="file_name"
+                            class="form-control"
+                            placeholder="File"
+                            formControlName="file_name"
+                            (change)="onSelectFile($event)"
+                          />
+                          <input type="hidden" class="form-control" />
+                          <div *ngIf="file_name.invalid && file_name.touched">
+                            <small
+                              class="text-danger"
+                              *ngIf="file_name.errors?.required"
+                            >
+                              Please Select File
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark"
+                      (click)="addDocument()"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </ng-template>
+                <input
+                  class="btn btn-success btn-sm"
+                  style="margin-bottom: 10px"
+                  type="button"
+                  value="Add Document"
+                  data-toggle="modal"
+                  data-target="#documentupload"
+                  (click)="open(content)"
+                />
+
+                <ag-grid-angular
+                  #agGrid
+                  style="width: 100%; height: 400px;"
+                  suppressCellSelection="true"
+                  class="ag-theme-balham"
+                  [rowData]="DocumentList"
+                  [columnDefs]="columnDefs"
+                  rowHeight="50"
+                  pagination="true"
+                >
+                </ag-grid-angular>
+
+                <hr />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

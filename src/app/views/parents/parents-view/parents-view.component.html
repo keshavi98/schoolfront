@@ -1,0 +1,297 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="well">
+      <div class="row">
+        <div classs="col-sm-6">
+          <button class="btn-cs btn-sm-cs">
+            <!-- <button class="btn-cs btn-sm-cs" (click)="printPage()"> -->
+            <span class="fa fa-print"></span> Print
+          </button>
+          <a
+            href=""
+            class="btn-cs btn-sm-cs"
+            style="text-decoration: none;"
+            role="button"
+            target="_blank"
+            ><i class="fa fa-file"></i> PDF Preview</a
+          >
+          <a
+            href=""
+            class="btn-cs btn-sm-cs"
+            style="text-decoration: none;"
+            role="button"
+            [routerLink]="['/parents/edit-parents/', parentsview?._id]"
+            ><i class="fa fa-edit"></i> Edit</a
+          >
+          <button
+            class="btn-cs btn-sm-cs"
+            data-toggle="modal"
+            data-target="#mail"
+          >
+            <span class="fa fa-envelope-o"></span> Send Pdf to Mail
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="printablediv">
+      <div class="row">
+        <div class="col-sm-3">
+          <div
+            class="box box-primary"
+            style="background-color: white; padding: 15px;"
+          >
+            <div class="box-body box-profile">
+              <!-- <img
+                  src="http://192.168.1.46:3000/student/photo/1581322946326.jpeg"
+                /> -->
+              <img
+                class="profile-user-img img-responsive img-circle"
+                [src]="apiUrl + parentsview?.photo"
+                alt=""
+              />
+              <h3 class="profile-username text-center">
+                {{ parentsview?.guardian_name }}
+              </h3>
+              <p class="text-muted text-center">Parents</p>
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Phone</b>
+                  <a class="pull-right">{{ parentsview?.phone }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li [ngClass]="activeTab == 1 ? 'active' : ''">
+                <a (click)="switchTab(1)" class="tabmenu">Profile </a>
+              </li>
+              <li [ngClass]="activeTab == 2 ? 'active' : ''">
+                <a (click)="switchTab(2)" class="tabmenu" *ngIf="role != 2"
+                  >Children</a
+                >
+              </li>
+              <li [ngClass]="activeTab == 3 ? 'active' : ''">
+                <a (click)="switchTab(3)" class="tabmenu" *ngIf="role != 2"
+                  >Document</a
+                >
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane" [ngClass]="activeTab == 1 ? 'active' : ''">
+                <div class="panel-body profile-view-dis">
+                  <div class="row">
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                      padding: 0 15px;"
+                    >
+                      <p style="margin: 0 0 10px;">
+                        <span class="title">Father's Name</span>:{{
+                          parentsview?.father_name
+                        }}
+                      </p>
+                    </div>
+                    <div class="profile-view-tab" style="width: 50%;">
+                      <p>
+                        <span class="title">Father's Profession</span>:{{
+                          parentsview?.father_profession
+                        }}
+                      </p>
+                    </div>
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                      padding: 0 15px;"
+                    >
+                      <p>
+                        <span class="title">Mother's Name</span>:{{
+                          parentsview?.mother_name
+                        }}
+                      </p>
+                    </div>
+                    <div class="profile-view-tab" style="width: 50%;">
+                      <p>
+                        <span class="title">Mother's Profession</span>:{{
+                          parentsview?.mother_profession
+                        }}
+                      </p>
+                    </div>
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                    padding: 0 15px;"
+                    >
+                      <p>
+                        <span class="title">Email</span>:{{
+                          parentsview?.email
+                        }}
+                      </p>
+                    </div>
+                    <div class="profile-view-tab" style="width: 50%;">
+                      <p>
+                        <span class="title">Address</span>:{{
+                          parentsview?.address
+                        }}
+                      </p>
+                    </div>
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                  padding: 0 15px;"
+                    >
+                      <p>
+                        <span class="title">Username</span>:{{
+                          parentsview?.user_id.username
+                        }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane" [ngClass]="activeTab == 2 ? 'active' : ''">
+                <div class="panel-body profile-view-dis">
+                  <div>
+                    <ag-grid-angular
+                      #agGrid
+                      style="height: 400px;"
+                      suppressCellSelection="true"
+                      class="ag-theme-balham"
+                      [rowData]="childrenview"
+                      [columnDefs]="columnDefs"
+                      rowHeight="50"
+                      pagination="true"
+                    >
+                    </ag-grid-angular>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" [ngClass]="activeTab == 3 ? 'active' : ''">
+                <ng-template #content let-modal>
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">
+                      Document Upload
+                    </h4>
+                    <button
+                      type="button"
+                      class="close"
+                      aria-label="Close"
+                      (click)="modal.dismiss('Cross click')"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form
+                      [formGroup]="createDocumentForm"
+                      action=""
+                      method="post"
+                      enctype="multipart/form-data"
+                      class="form-horizontal"
+                    >
+                      <div class="form-group">
+                        <label
+                          for="title"
+                          class="col-sm-2 control-label"
+                          style="float: left;"
+                        >
+                          Title <span class="text-red">*</span>
+                        </label>
+                        <div
+                          class="col-sm-6"
+                          style="float: left; margin-bottom: 10px;"
+                        >
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="title"
+                            id="title"
+                            name="title"
+                            placeholder="Title"
+                          />
+                        </div>
+                        <div *ngIf="title.invalid && title.touched">
+                          <small
+                            class="text-danger"
+                            *ngIf="title.errors?.required"
+                          >
+                            Please Enter Title
+                          </small>
+                        </div>
+                      </div>
+                      <div
+                        class="form-group"
+                        style="width: 100%; display:inline-block;"
+                      >
+                        <label
+                          for="file_name"
+                          class="col-sm-2 control-label"
+                          style="float: left;"
+                        >
+                          File <span class="text-red">*</span>
+                        </label>
+                        <div class="col-sm-6" style="float: left;">
+                          <input
+                            type="file"
+                            id="file_name"
+                            class="form-control"
+                            placeholder="File"
+                            formControlName="file_name"
+                            (change)="onSelectFile($event)"
+                          />
+                          <input type="hidden" class="form-control" />
+                          <div *ngIf="file_name.invalid && file_name.touched">
+                            <small
+                              class="text-danger"
+                              *ngIf="file_name.errors?.required"
+                            >
+                              Please Select File
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark"
+                      (click)="addDocument()"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </ng-template>
+                <input
+                  class="btn btn-success btn-sm"
+                  style="margin-bottom: 10px"
+                  type="button"
+                  value="Add Document"
+                  data-toggle="modal"
+                  data-target="#documentupload"
+                  (click)="open(content)"
+                />
+
+                <ag-grid-angular
+                  #agGrid1
+                  style="width: 100%; height: 400px;"
+                  suppressCellSelection="true"
+                  class="ag-theme-balham"
+                  [rowData]="DocumentList"
+                  [columnDefs]="documentlist"
+                  rowHeight="50"
+                  pagination="true"
+                >
+                </ag-grid-angular>
+                <hr />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

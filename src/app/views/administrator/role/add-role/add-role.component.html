@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Role</strong></div>
+      <div class="card-body">
+        <form [formGroup]="createRoleForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="role"
+                >Role<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="role"
+                  name="role"
+                  class="form-control"
+                  placeholder="Role"
+                  formControlName="role"
+                />
+                <div *ngIf="role.invalid && role.touched">
+                  <small class="text-danger" *ngIf="role.errors?.required">
+                    Please Enter Role
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="addRole()"
+            [disabled]="createRoleForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            Add Role
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetRole()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,247 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Leave Apply</strong></div>
+      <div class="card-body">
+        <form [formGroup]="createLeaveapplyForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="role"
+                >Role<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="to_user_role">
+                  <option value="" selected disabled>---Select Role---</option>
+                  <ng-container *ngFor="let data of userRoles">
+                    <option
+                      value="{{ data.type }}"
+                      title="{{ data.role }}"
+                      *ngIf="data.type == 1 || data.type == 2"
+                      >{{ data.role }}</option
+                    >
+                    <div *ngIf="to_user_role.invalid && to_user_role.touched">
+                      <small
+                        class="text-danger"
+                        *ngIf="to_user_role.errors?.required"
+                      >
+                        Please Enter Role
+                      </small>
+                    </div>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+
+            <div
+              class="col-md-4"
+              *ngIf="createLeaveapplyForm.value.to_user_role == 2"
+            >
+              <label class="col-form-label" for="to_user"
+                >Application To <span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="to_user">
+                  <option value="" selected disabled>--Select--</option>
+                  <option
+                    *ngFor="let data of TeacherList"
+                    value="{{ data.user_id }}"
+                    title="{{ data.name }}"
+                    >{{ data.name }}</option
+                  >
+
+                  <div *ngIf="to_user.invalid && to_user.touched">
+                    <small class="text-danger" *ngIf="to_user.errors?.required">
+                      Please Enter Application To
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+            <div
+              class="col-md-4"
+              *ngIf="createLeaveapplyForm.value.to_user_role == 1"
+            >
+              <label class="col-form-label" for="to_user"
+                >Application To
+              </label>
+              <div class="">
+                <select class="form-control" formControlName="to_user">
+                  <option value="" selected disabled>--Select--</option>
+                  <option
+                    *ngFor="let data of AdminList"
+                    value="{{ data.user_id }}"
+                    title="{{ data.name }}"
+                    >{{ data.name }}</option
+                  >
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="category"
+                >Category<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="category">
+                  <option value="" selected disabled>--Select--</option>
+                  <option
+                    *ngFor="let data of LeavecategoryList"
+                    value="{{ data._id }}"
+                    title="{{ data.category }}"
+                    >{{ data.category }}</option
+                  >
+                  <div *ngIf="category.invalid && category.touched">
+                    <small
+                      class="text-danger"
+                      *ngIf="category.errors?.required"
+                    >
+                      Please Enter Category
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="from_date"
+                >Form Date<span class="text-danger">*</span>
+              </label>
+              <div class="">
+                <input
+                  id="date"
+                  name="from_date"
+                  type="text"
+                  class="form-control"
+                  placeholder="From Date"
+                  formControlName="from_date"
+                  (change)="onDateChanged()"
+                />
+                <div *ngIf="from_date.invalid && from_date.touched">
+                  <small class="text-danger" *ngIf="from_date.errors?.required">
+                    Please Enter From Date
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="to_date"
+                >To Date<span class="text-danger">*</span>
+              </label>
+              <div class="">
+                <input
+                  id="date"
+                  name="to_date"
+                  type="text"
+                  class="form-control"
+                  placeholder="To Date"
+                  (change)="onDateChanged()"
+                  formControlName="to_date"
+                />
+                <div *ngIf="to_date.invalid && to_date.touched">
+                  <small class="text-danger" *ngIf="to_date.errors?.required">
+                    Please Enter To Date
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="reason"
+                >Reason<span class="text-danger">*</span>
+              </label>
+              <div class="">
+                <textarea
+                  id="reason"
+                  name="reason"
+                  type="text"
+                  class="form-control"
+                  placeholder="Reason"
+                  formControlName="reason"
+                ></textarea>
+                <div *ngIf="reason.invalid && reason.touched">
+                  <small class="text-danger" *ngIf="reason.errors?.required">
+                    Please Enter Reason
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="status">Status</label>
+              <div class="">
+                <select class="form-control" formControlName="status">
+                  <option value="" selected disabled>-----Select-----</option>
+                  <option value="0">In Active</option>
+                  <option value="1">Active</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="file_name"
+                >Attachment<span class="text-danger">*</span></label
+              >
+              <input
+                type="file"
+                id="file_name"
+                class="form-control"
+                placeholder="File"
+                formControlName="file_name"
+                (change)="onSelectFile($event)"
+              />
+              <input type="hidden" class="form-control" />
+              <div *ngIf="file_name.invalid && file_name.touched">
+                <small class="text-danger" *ngIf="file_name.errors?.required">
+                  Please Select File
+                </small>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="checkbox-wrp">
+                <input
+                  formControlName="on_duty_leave"
+                  class="form-check-input"
+                  type="checkbox"
+                  value="on_duty_leave"
+                  id="on_duty_leave"
+                />
+                <label class="form-check-label" for="on_duty_leave">
+                  On Duty Leave?<span class="text-danger">*</span>
+                </label>
+                <div *ngIf="on_duty_leave.invalid && on_duty_leave.touched">
+                  <small
+                    class="text-danger"
+                    *ngIf="on_duty_leave.errors?.required"
+                  >
+                    Please Enter On Duty Leave
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="editLeaveapply()"
+            [disabled]="createLeaveapplyForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            Edit Leave Apply
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetLeaveapply()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

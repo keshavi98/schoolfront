@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Notice</strong></div>
+      <div class="card-body">
+        <form [formGroup]="createNoticeForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="title"
+                >Title<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  class="form-control"
+                  placeholder="Title"
+                  formControlName="title"
+                />
+                <div *ngIf="title.invalid && title.touched">
+                  <small class="text-danger" *ngIf="title.errors?.required">
+                    Please Enter Title
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="date"
+                >Date<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  class="form-control"
+                  id="date"
+                  formControlName="date"
+                  type="text"
+                  name="date"
+                    (change)="onDateChanged()"
+                  placeholder="Date"
+                />
+              </div>
+              <div *ngIf="date.invalid && date.touched">
+                <small class="text-danger" *ngIf="date.errors?.required">
+                  Please Enter Date
+                </small>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="notice"
+                >Notice<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <textarea
+                  class="form-control"
+                  id="notice"
+                  formControlName="notice"
+                  type="text"
+                  name="notice"
+                  placeholder="Notice"
+                ></textarea>
+              </div>
+              <div *ngIf="notice.invalid && notice.touched">
+                <small class="text-danger" *ngIf="notice.errors?.required">
+                  Please Enter Notice
+                </small>
+              </div>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="editNotice()"
+            [disabled]="createNoticeForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            edit Notice
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetNotice()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

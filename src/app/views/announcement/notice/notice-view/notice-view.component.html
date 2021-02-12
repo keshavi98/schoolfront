@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="well">
+      <div class="row">
+        <div classs="col-sm-6">
+          <button class="btn-cs btn-sm-cs">
+            <span class="fa fa-print"></span> Print
+          </button>
+          <a
+            href="https://demo.inilabs.net/school/v4.4/student/print_preview/1/1"
+            class="btn-cs btn-sm-cs"
+            style="text-decoration: none;"
+            role="button"
+            target="_blank"
+            ><i class="fa fa-file"></i> PDF Preview</a
+          >
+          <a
+            href="https://demo.inilabs.net/school/v4.4/student/edit/1/1"
+            class="btn-cs btn-sm-cs"
+            style="text-decoration: none;"
+            role="button"
+            [routerLink]="['/announcement/notice/edit-notice', noticeview?._id]"
+            ><i class="fa fa-edit"></i> Edit</a
+          >
+          <button
+            class="btn-cs btn-sm-cs"
+            data-toggle="modal"
+            data-target="#mail"
+          >
+            <span class="fa fa-envelope-o"></span> Send Pdf to Mail
+          </button>
+        </div>
+      </div>
+    </div>
+    <section
+      class="panel"
+      style="margin-bottom: 20px;
+    background-color: #fff;
+    border: 0px solid transparent;
+    border-radius: 4px;"
+    >
+      <div class="panel-body bio-graph-info">
+        <div id="printablediv" class="box-body">
+          <div class="row">
+            <div class="col-sm-12">
+              {{ noticeview?.title }}<br /><br />
+              <span xss="removed">{{ noticeview?.notice }}</span
+              ><br /><br />
+              {{ noticeview?.date }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

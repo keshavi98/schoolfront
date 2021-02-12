@@ -1,0 +1,117 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Syllabus</strong></div>
+      <div class="card-body">
+        <form [formGroup]="createSyllabusForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="title"
+                >Title<span class="text-danger">*</span>
+              </label>
+              <div class="">
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  class="form-control"
+                  placeholder="Title"
+                  formControlName="title"
+                />
+                <div *ngIf="title.invalid && title.touched">
+                  <small class="text-danger" *ngIf="title.errors?.required">
+                    Please Enter Title
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="description"
+                >Description<span class="text-danger">*</span>
+              </label>
+              <div class="">
+                <input
+                  type="text"
+                  id="description"
+                  name="description"
+                  class="form-control"
+                  placeholder="Description"
+                  formControlName="description"
+                />
+                <div *ngIf="description.invalid && description.touched">
+                  <small
+                    class="text-danger"
+                    *ngIf="description.errors?.required"
+                  >
+                    Please Enter Description
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="class_id"
+                >Class Name<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="class">
+                  <option value="" selected disabled>----Select----</option>
+                  <option
+                    *ngFor="let data of ClassList"
+                    value="{{ data._id }}"
+                    title="{{ data.class }}"
+                    >{{ data.class }}</option
+                  >
+                  <div *ngIf="class.invalid && class.touched">
+                    <small class="text-danger" *ngIf="class.errors?.required">
+                      Please Enter Class
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="file_name"
+                >File<span class="text-danger">*</span></label
+              >
+              <input
+                type="file"
+                id="file_name"
+                class="form-control"
+                placeholder="File"
+                formControlName="file_name"
+                (change)="onSelectFile($event)"
+              />
+              <input type="hidden" class="form-control" />
+              <div *ngIf="file_name.invalid && file_name.touched">
+                <small class="text-danger" *ngIf="file_name.errors?.required">
+                  Please Select File
+                </small>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="addSyllabus()"
+            [disabled]="createSyllabusForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            Add Syllabus
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetSyllabus()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

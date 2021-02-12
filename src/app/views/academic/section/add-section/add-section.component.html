@@ -1,0 +1,158 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><strong>Section</strong></div>
+      <div class="card-body">
+        <form [formGroup]="createSectionForm">
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="section"
+                >Section<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="section"
+                  name="section"
+                  class="form-control"
+                  placeholder="Section"
+                  formControlName="section"
+                />
+                <div *ngIf="section.invalid && section.touched">
+                  <small class="text-danger" *ngIf="section.errors?.required">
+                    Please Enter Section
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="category"
+                >Category <span class="text-danger">*</span>
+              </label>
+              <div class="">
+                <input
+                  type="text"
+                  id="category"
+                  name="category"
+                  class="form-control"
+                  placeholder="Category"
+                  formControlName="category"
+                />
+                <div *ngIf="category.invalid && category.touched">
+                  <small class="text-danger" *ngIf="category.errors?.required">
+                    Please Enter Category
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="capacity"
+                >Capacity<span class="text-danger">*</span>
+              </label>
+              <div class="">
+                <input
+                  type="text"
+                  id="capacity"
+                  name="capacity"
+                  class="form-control"
+                  placeholder="Capacity"
+                  formControlName="capacity"
+                />
+                <div *ngIf="capacity.invalid && capacity.touched">
+                  <small class="text-danger" *ngIf="capacity.errors?.required">
+                    Please Enter Capacity
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="class"
+                >Class <span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="class">
+                  <option value="" selected disabled>---Select---</option>
+                  <option
+                    *ngFor="let data of ClassList"
+                    value="{{ data._id }}"
+                    title="{{ data.class }}"
+                    >{{ data.class }}</option
+                  >
+                  <div *ngIf="class.invalid && class.touched">
+                    <small class="text-danger" *ngIf="class.errors?.required">
+                      Please Enter Class
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="teacher"
+                >Teacher Name <span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="teacher">
+                  <option value="" selected disabled>---Select---</option>
+                  <option
+                    *ngFor="let data of TeacherList"
+                    value="{{ data._id }}"
+                    title="{{ data.name }}"
+                    >{{ data.name }}</option
+                  >
+                  <div *ngIf="teacher.invalid && teacher.touched">
+                    <small class="text-danger" *ngIf="teacher.errors?.required">
+                      Please Enter Teacher Name
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-md-3 col-form-label" for="note">Note </label>
+              <div class="">
+                <textarea
+                  type="text"
+                  id="note"
+                  name="note"
+                  class="form-control"
+                  placeholder="Note"
+                  formControlName="note"
+                ></textarea>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="addSection()"
+            [disabled]="createSectionForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i>
+            Add Section
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetSection()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>

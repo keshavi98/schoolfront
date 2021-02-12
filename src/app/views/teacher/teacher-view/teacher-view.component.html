@@ -1,0 +1,403 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="well">
+      <div class="row">
+        <div classs="col-sm-6">
+          <button class="btn-cs btn-sm-cs">
+            <span class="fa fa-print"></span> Print
+          </button>
+          <a
+            href="https://demo.inilabs.net/school/v4.4/student/print_preview/1/1"
+            class="btn-cs btn-sm-cs"
+            style="text-decoration: none;"
+            role="button"
+            target="_blank"
+            ><i class="fa fa-file"></i> PDF Preview</a
+          >
+          <a
+            href=""
+            class="btn-cs btn-sm-cs"
+            style="text-decoration: none;"
+            role="button"
+            [routerLink]="['/teacher/edit-teacher/', teacherview?._id]"
+            ><i class="fa fa-edit"></i> Edit</a
+          >
+          <button
+            class="btn-cs btn-sm-cs"
+            data-toggle="modal"
+            data-target="#mail"
+          >
+            <span class="fa fa-envelope-o"></span> Send Pdf to Mail
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="printablediv">
+      <div class="row">
+        <div class="col-sm-3">
+          <div
+            class="box box-primary"
+            style="background-color: white; padding: 15px;"
+          >
+            <div class="box-body box-profile">
+              <img
+                class="profile-user-img img-responsive img-circle"
+                [src]="apiUrl + teacherview?.photo"
+                alt=""
+              />
+              <h3 class="profile-username text-center">
+                {{ teacherview?.name }}
+              </h3>
+              <p class="text-muted text-center">Teacher</p>
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Gender</b>
+                  <a class="pull-right">{{ teacherview?.gender }}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Date of Birth</b>
+                  <a class="pull-right">{{ teacherview?.dob }}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Phone</b>
+                  <a class="pull-right">{{ teacherview?.phone }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li [ngClass]="activeTab == 1 ? 'active' : ''">
+                <a (click)="switchTab(1)" class="tabmenu">Profile </a>
+              </li>
+
+              <li [ngClass]="activeTab == 3 ? 'active' : ''">
+                <a (click)="switchTab(3)" class="tabmenu" *ngIf="role != 3 && role != 4"
+                  >Timetable</a
+                >
+              </li>
+              <li [ngClass]="activeTab == 4 ? 'active' : ''">
+                <a (click)="switchTab(4)" class="tabmenu" *ngIf="role != 3 && role != 4"
+                  >Attendance</a
+                >
+              </li>
+              <li [ngClass]="activeTab == 5 ? 'active' : ''">
+                <a (click)="switchTab(5)" class="tabmenu" *ngIf="role != 3 && role != 4"
+                  >Salary</a
+                >
+              </li>
+              <li [ngClass]="activeTab == 6 ? 'active' : ''">
+                <a (click)="switchTab(6)" class="tabmenu" *ngIf="role != 3 && role != 4"
+                  >Payment</a
+                >
+              </li>
+              <li [ngClass]="activeTab == 7 ? 'active' : ''">
+                <a (click)="switchTab(7)" class="tabmenu" *ngIf="role != 3 && role != 4 "
+                  >Document</a
+                >
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane" [ngClass]="activeTab == 1 ? 'active' : ''">
+                <div class="panel-body profile-view-dis">
+                  <div class="row">
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                      padding: 0 15px;"
+                    >
+                      <p style="margin: 0 0 10px;">
+                        <span class="title">Joining Date</span>:{{
+                          teacherview?.joining_date
+                        }}
+                      </p>
+                    </div>
+                    <div class="profile-view-tab" style="width: 50%;">
+                      <p>
+                        <span class="title">Religion</span>:{{
+                          teacherview?.religion
+                        }}
+                      </p>
+                    </div>
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                      padding: 0 15px;"
+                    >
+                      <p>
+                        <span class="title">Email</span>:{{
+                          teacherview?.email
+                        }}
+                      </p>
+                    </div>
+                    <div class="profile-view-tab" style="width: 50%;">
+                      <p>
+                        <span class="title">Address</span>:{{
+                          teacherview?.address
+                        }}
+                      </p>
+                    </div>
+                    <div
+                      class="profile-view-tab"
+                      style="width: 50%; margin-bottom: 10px;
+                    padding: 0 15px;"
+                    >
+                      <p>
+                        <span class="title">Username</span>:{{
+                          teacherview?.user_id.username
+                        }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane" [ngClass]="activeTab == 3 ? 'active' : ''">
+                <div class="panel-body profile-view-dis">
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-responsive">
+                      <thead>
+                        <!-- <tr>
+                            <th class="text-center">Day</th>
+                            <th class="text-center">1st Period</th>
+                            <th class="text-center">2st Period</th>
+                            <th class="text-center">3st Period</th>
+                          </tr> -->
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of timetableview">
+                          <td>{{ data?._id }}</td>
+                          <td
+                            class="text-center"
+                            *ngFor="let docdata of data.doc"
+                          >
+                            <p style="margin: 0px 0px 1px">
+                              {{ docdata?.start_time }}{{ docdata?.end_time }}
+                            </p>
+                            <p style="margin: 0px 0px 1px">
+                              <span class="left">Subject :</span>
+                              <span class="right"
+                                >{{ (docdata?.subject_info)[0].subject_name }}
+                              </span>
+                            </p>
+                            <p style="margin: 0px 0px 1px">
+                              <span class="left">Class :</span>
+                              <span class="right">
+                                {{ (docdata?.class_info)[0].class }}</span
+                              >
+                            </p>
+                            <p style="margin: 0px 0px 1px">
+                              <span class="left">Section :</span>
+                              <span class="right">
+                                {{ (docdata?.section_info)[0].section }}</span
+                              >
+                            </p>
+                            <p style="margin: 0px 0px 1px">
+                              <span class="left">Room : </span
+                              ><span class="right">{{ docdata?.room }}</span>
+                            </p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" [ngClass]="activeTab == 4 ? 'active' : ''">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div
+                      class="studentDIV mCustomScrollbar _mCS_3 mCS_no_scrollbar"
+                    >
+                      <div
+                        id="mCSB_3"
+                        class="mCustomScrollBox mCS-light mCSB_horizontal mCSB_inside"
+                        tabindex="0"
+                        style="max-height: none;"
+                      >
+                        <div
+                          id="mCSB_3_container"
+                          class="mCSB_container mCS_x_hidden mCS_no_scrollbar_x"
+                          style="position: relative; top: 0px; left: 0px; width: 100%;"
+                          dir="ltr"
+                        >
+                          <table class="attendance_table">
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th *ngFor="let date of arrDate">
+                                  {{ date }}
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let month of arrMonth">
+                                <td>{{ month.month }}</td>
+                                <ng-container *ngFor="let date of arrDate">
+                                  <td
+                                    [ngClass]="
+                                      arrAttendanceData[month.id][date]['type']
+                                    "
+                                  >
+                                    {{
+                                      arrAttendanceData[month.id][date]["label"]
+                                    }}
+                                  </td>
+                                </ng-container>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <p class="totalattendanceCount">
+                      Total Holiday:{{ holiday }}, Total Weekend:{{ weekend }},
+                      Total Leave:{{ leaveapply }}, Total Present:{{ present }},
+                      Total Late With Excuse:{{ le }}, Total Late:{{ lp }},
+                      Total Absent:{{ absent }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="tab-pane"
+                [ngClass]="activeTab == 5 ? 'active' : ''"
+              ></div>
+              <div
+                class="tab-pane"
+                [ngClass]="activeTab == 6 ? 'active' : ''"
+              ></div>
+              <div
+                class="tab-pane"
+                [ngClass]="activeTab == 7 ? 'active' : ''"
+              ></div>
+              <div class="tab-pane" [ngClass]="activeTab == 7 ? 'active' : ''">
+                <ng-template #content let-modal>
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">
+                      Document Upload
+                    </h4>
+                    <button
+                      type="button"
+                      class="close"
+                      aria-label="Close"
+                      (click)="modal.dismiss('Cross click')"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form
+                      [formGroup]="createDocumentForm"
+                      action=""
+                      method="post"
+                      enctype="multipart/form-data"
+                      class="form-horizontal"
+                    >
+                      <div class="form-group">
+                        <label
+                          for="title"
+                          class="col-sm-2 control-label"
+                          style="float: left;"
+                        >
+                          Title <span class="text-red">*</span>
+                        </label>
+                        <div
+                          class="col-sm-6"
+                          style="float: left; margin-bottom: 10px;"
+                        >
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="title"
+                            id="title"
+                            name="title"
+                            placeholder="Title"
+                          />
+                        </div>
+                        <div *ngIf="title.invalid && title.touched">
+                          <small
+                            class="text-danger"
+                            *ngIf="title.errors?.required"
+                          >
+                            Please Enter Title
+                          </small>
+                        </div>
+                      </div>
+                      <div
+                        class="form-group"
+                        style="width: 100%; display:inline-block;"
+                      >
+                        <label
+                          for="file_name"
+                          class="col-sm-2 control-label"
+                          style="float: left;"
+                        >
+                          File <span class="text-red">*</span>
+                        </label>
+                        <div class="col-sm-6" style="float: left;">
+                          <input
+                            type="file"
+                            id="file_name"
+                            class="form-control"
+                            placeholder="File"
+                            formControlName="file_name"
+                            (change)="onSelectFile($event)"
+                          />
+                          <input type="hidden" class="form-control" />
+                          <div *ngIf="file_name.invalid && file_name.touched">
+                            <small
+                              class="text-danger"
+                              *ngIf="file_name.errors?.required"
+                            >
+                              Please Select File
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-outline-dark"
+                      (click)="addDocument()"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </ng-template>
+                <input
+                  class="btn btn-success btn-sm"
+                  style="margin-bottom: 10px"
+                  type="button"
+                  value="Add Document"
+                  data-toggle="modal"
+                  data-target="#documentupload"
+                  (click)="open(content)"
+                />
+
+                <ag-grid-angular
+                  #agGrid
+                  style="width: 100%; height: 400px;"
+                  suppressCellSelection="true"
+                  class="ag-theme-balham"
+                  [rowData]="DocumentList"
+                  [columnDefs]="columnDefs"
+                  rowHeight="50"
+                  pagination="true"
+                >
+                </ag-grid-angular>
+                <hr />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

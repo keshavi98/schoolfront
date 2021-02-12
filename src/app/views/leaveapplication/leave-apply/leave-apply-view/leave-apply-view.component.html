@@ -1,0 +1,165 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="well">
+      <div class="row">
+        <div classs="col-sm-6">
+          <button class="btn-cs btn-sm-cs">
+            <span class="fa fa-print"></span> Print
+          </button>
+          <a
+            href="https://demo.inilabs.net/school/v4.4/student/print_preview/1/1"
+            class="btn-cs btn-sm-cs"
+            style="text-decoration: none;"
+            role="button"
+            target="_blank"
+            ><i class="fa fa-file"></i> PDF Preview</a
+          >
+
+          <button
+            class="btn-cs btn-sm-cs"
+            data-toggle="modal"
+            data-target="#mail"
+          >
+            <span class="fa fa-envelope-o"></span> Send Pdf to Mail
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="printablediv">
+      <div class="row">
+        <div class="col-sm-3">
+          <div
+            class="box box-primary"
+            style="background-color: white; padding: 15px;"
+          >
+            <div class="box-body box-profile">
+              <!-- <img
+                src="http://192.168.1.46:3000/student/photo/1581322946326.jpeg"
+                style="margin: 0 auto;
+                width: 100px;
+                height: 100px;
+                padding: 3px;
+                border: 3px solid #d2d6de;
+                border-radius: 50%;
+                vertical-align: middle;
+                margin-left: 55px;"
+              /> -->
+              <img
+                class="profile-user-img img-responsive img-circle"
+                [src]="apiUrl + leaveApplyview?.from_user_info.photo"
+                alt=""
+              />
+
+              <h3 class="profile-username text-center">
+                {{ leaveApplyview?.from_user_info.name }}
+              </h3>
+              <!-- <p class="text-muted text-center">Admin</p> -->
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Gender</b>
+                  <a class="pull-right">{{
+                    leaveApplyview?.from_user_info.gender
+                  }}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Date of Birth</b>
+                  <a class="pull-right">{{
+                    leaveApplyview?.from_user_info.dob
+                  }}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Phone</b>
+                  <a class="pull-right">{{
+                    leaveApplyview?.from_user_info.phone
+                  }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-sm-6 col-mergin"
+          style="width: 50%; position: relative;
+        background: #ffffff;
+        margin-bottom: 20px;"
+        >
+          <div class="box box-primary box-height">
+            <div class="box-body box-profile">
+              <h5>Date - 29 Jan 2019</h5>
+              <p>
+                <span xss="removed"
+                  >All leave must be documented by using the Leave Request form.
+                  Before requesting paid leave, employees must confirm that the
+                  leave to be requested is available by checking the leave
+                  balances on their most current pay voucher or through the
+                  employee self-service system.</span
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div
+            class="box box-primary"
+            style="background-color: white; padding: 15px;"
+          >
+            <div class="box-body box-profile">
+              <div class="single_box">
+                <strong>Schedule</strong>
+                <p class="text-muted">
+                  {{ leaveApplyview?.from_date }} {{ leaveApplyview?.to_date }}
+                </p>
+              </div>
+              <div class="single_box">
+                <strong>Available Leave Days</strong>
+                <p class="text-muted">-16</p>
+              </div>
+              <div class="single_box">
+                <strong>Leave Day</strong>
+                <p class="text-muted">0</p>
+              </div>
+              <div class="single_box">
+                <strong>Holiday</strong>
+                <p class="text-muted">11</p>
+              </div>
+              <div class="single_box">
+                <strong>Weekend Day</strong>
+                <p class="text-muted">1</p>
+              </div>
+              <div class="single_box">
+                <strong>Total Day</strong>
+                <p class="text-muted">17</p>
+              </div>
+              <div class="single_box">
+                <strong>Category</strong>
+                <p class="text-muted">Sick Leave</p>
+              </div>
+              <div class="single_box">
+                <strong>On Duty Leave?</strong>
+                <p class="text-muted">
+                  {{ leaveApplyview?.on_duty_leave }}
+                </p>
+              </div>
+              <div class="single_box">
+                <strong>Application Status</strong>
+                <p class="text-muted">
+                  Pending
+                </p>
+              </div>
+              <div class="single_box">
+                <a
+                  href="https://demo.inilabs.net/school/v4.4/leaveapplication/status/8"
+                  class="btn btn-primary btn-block"
+                  data-placement="top"
+                  data-toggle="tooltip"
+                  data-original-title="Approve"
+                  >Approve</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

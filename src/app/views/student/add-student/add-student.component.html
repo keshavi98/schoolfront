@@ -1,0 +1,461 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <strong class="col-form-label"> Student </strong>
+      </div>
+      <div class="card-body">
+        <form
+          [formGroup]="createStudentForm"
+          action=""
+          method="post"
+          enctype="multipart/form-data"
+          class="form-horizontal"
+        >
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="photo_name">Photo</label>
+              <input
+                type="file"
+                id="photo_name"
+                class="form-control"
+                placeholder="photo"
+                (change)="onSelectPhoto($event)"
+              />
+              <input
+                type="hidden"
+                class="form-control"
+                formControlName="photo"
+              />
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="register_no"
+                >Register NO<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="register_no"
+                  formControlName="register_no"
+                  name="register_no"
+                  class="form-control"
+                  placeholder="Register No"
+                />
+              </div>
+              <div *ngIf="register_no.invalid && register_no.touched">
+                <small class="text-danger" *ngIf="register_no.errors?.required">
+                  Please Enter Register No
+                </small>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="col-form-label" for="roll_no"
+                >Roll NO<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="roll_no"
+                  formControlName="roll_no"
+                  name="roll_no"
+                  class="form-control"
+                  placeholder="Roll No"
+                />
+              </div>
+              <div *ngIf="roll_no.invalid && roll_no.touched">
+                <small class="text-danger" *ngIf="roll_no.errors?.required">
+                  Please Enter Roll No
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="student_name"
+                >Student name<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="student_name"
+                  formControlName="student_name"
+                  name="student_name"
+                  class="form-control"
+                  placeholder="Student name"
+                />
+              </div>
+              <div *ngIf="student_name.invalid && student_name.touched">
+                <small
+                  class="text-danger"
+                  *ngIf="student_name.errors?.required"
+                >
+                  Please Enter Student Name
+                </small>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="col-form-label" for="parents"
+                >Guardian's name<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="parents">
+                  <option value="">---Select---</option>
+                  <ng-container *ngFor="let data of ParentsList">
+                    <option value="{{ data._id }}" title="{{ data.parents }}">{{
+                      data.guardian_name
+                    }}</option>
+                    <div *ngIf="parents.invalid && parents.touched">
+                      <small
+                        class="text-danger"
+                        *ngIf="parents.errors?.required"
+                      >
+                        Please Enter Guardian's name
+                      </small>
+                    </div>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="dob"
+                >Date Of Birth<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  class="form-control"
+                  id="dob"
+                  formControlName="dob"
+                  type="text"
+                  (change)="onDateChanged()"
+                  name="dob"
+                  placeholder="Date Of Birth"
+                />
+              </div>
+              <div *ngIf="dob.invalid && dob.touched">
+                <small class="text-danger" *ngIf="dob.errors?.required">
+                  Please Enter Date of Birth
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="gender">Gender</label>
+              <div class="">
+                <!-- <input
+                  type="text"
+                  id="gender"
+                  formControlName="gender"
+                  name="gender"
+                  class="form-control"
+                  placeholder="Gender"
+                /> -->
+                <select class="form-control" formControlName="gender">
+                  <option value="" selected disabled>-----Select-----</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="col-form-label" for="blood_group"
+                >Blood Group</label
+              >
+              <div class="">
+                <select class="form-control" formControlName="blood_group">
+                  <option value="" selected disabled>-----Select-----</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="col-form-label" for="religion">Religion</label>
+              <div class="">
+                <input
+                  type="text"
+                  id="religion"
+                  formControlName="religion"
+                  name="religion"
+                  class="form-control"
+                  placeholder="Religion"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="email">Email </label>
+              <div class="">
+                <input
+                  type="email"
+                  id="email"
+                  formControlName="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Email "
+                  autocomplete="Email "
+                />
+              </div>
+              <div *ngIf="email.invalid && email.touched">
+                <small class="text-danger" *ngIf="email.errors?.required">
+                  Please Enter valid Email
+                </small>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="col-form-label" for="phone">Phone</label>
+              <div class="">
+                <input
+                  type="text"
+                  id="phone"
+                  formControlName="phone"
+                  name="phone"
+                  class="form-control"
+                  placeholder="Phone "
+                />
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-8">
+              <label class="col-form-label" for="address">Address</label>
+              <div class="">
+                <input
+                  type="text"
+                  id="address"
+                  formControlName="address"
+                  name="address"
+                  class="form-control"
+                  placeholder="Address "
+                />
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="state">State</label>
+              <div class="">
+                <input
+                  type="text"
+                  id="state"
+                  formControlName="state"
+                  name="state"
+                  class="form-control"
+                  placeholder="State"
+                />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="country">Country</label>
+              <div class="">
+                <input
+                  type="text"
+                  id="country"
+                  formControlName="country"
+                  name="country"
+                  class="form-control"
+                  placeholder="Country"
+                />
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="class"
+                >Class<span class="text-danger">*</span></label
+              >
+              <div class="">
+                <select
+                  class="form-control"
+                  formControlName="class"
+                  (change)="onClassChanged()"
+                >
+                  <option value="" selected disabled>--Select--</option>
+
+                  <option
+                    *ngFor="let data of ClassList"
+                    value="{{ data._id }}"
+                    title="{{ data.class }}"
+                    >{{ data.class }}</option
+                  >
+                  <div *ngIf="class.invalid && class.touched">
+                    <small class="text-danger" *ngIf="class.errors?.required">
+                      Please Enter Class
+                    </small>
+                  </div>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="section"
+                >Section<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <select class="form-control" formControlName="section">
+                  <option value="" selected disabled>---Select---</option>
+                  <ng-container *ngFor="let data of classSectionList">
+                    <option value="{{ data._id }}" title="{{ data.section }}">{{
+                      data.section
+                    }}</option>
+                    <div *ngIf="section.invalid && section.touched">
+                      <small
+                        class="text-danger"
+                        *ngIf="section.errors?.required"
+                      >
+                        Please Enter Section
+                      </small>
+                    </div>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="group">Group</label>
+              <div class="">
+                <select class="form-control" formControlName="group">
+                  <option value="" selected disabled>--Select--</option>
+
+                  <option
+                    *ngFor="let data of StudentGroupList"
+                    value="{{ data._id }}"
+                    title="{{ data.group }}"
+                    >{{ data.group }}</option
+                  >
+                </select>
+              </div>
+            </div>
+            <!-- <div class="col-md-4">
+              <label class="col-form-label" for="group">Group</label>
+
+              <div class="">
+                <select class="form-control" formControlName="group">
+                  <option value="">--Select--</option>
+                  <option>Science</option>
+                  <option>Arts</option>
+                  <option>Commerce</option>
+                </select>
+              </div>
+            </div> -->
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="optional_subject"
+                >Optional Subject</label
+              >
+              <div class="">
+                <select class="form-control" formControlName="optional_subject">
+                  <option value="">---Select---</option>
+                  <ng-container *ngFor="let data of classSubjectList">
+                    <option value="{{ data._id }}" title="{{ data.subject }}">{{
+                      data.subject_name
+                    }}</option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="extra_activities"
+                >Extra Curricular Activities
+              </label>
+              <div class="">
+                <input
+                  type="text"
+                  id="extra_activities"
+                  formControlName="extra_activities"
+                  name="extra_activities"
+                  class="form-control"
+                  placeholder="Extra Curricular Activities"
+                />
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="remark">Remarks</label>
+              <div class="">
+                <input
+                  type="text"
+                  id="remark"
+                  formControlName="remark"
+                  name="remark"
+                  class="form-control"
+                  placeholder="Remark"
+                />
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="col-form-label" for="username"
+                >Username<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="username"
+                  formControlName="username"
+                  name="username"
+                  class="form-control"
+                  placeholder="Username"
+                />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="col-form-label" for="password"
+                >Password<samp class="text-danger">*</samp></label
+              >
+              <div class="">
+                <input
+                  type="text"
+                  id="password"
+                  formControlName="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="password"
+                />
+              </div>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-sm btn-primary"
+            (click)="addStudent()"
+            [disabled]="createStudentForm.invalid"
+          >
+            <i class="fa fa-dot-circle-o"></i> Add Student
+          </button>
+          <button
+            type="reset"
+            class="btn btn-sm btn-danger"
+            (click)="resetStudent()"
+          >
+            <i class="fa fa-ban"></i> Reset
+          </button>
+        </form>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
+</div>
